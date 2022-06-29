@@ -50,9 +50,20 @@ class CrazyflieIntegrator(Integrator):
         RR = R.from_euler('xyz', self.state[3:6]).as_matrix()
         state_dot = np.zeros(9)
         state_dot[0:3] = self.state[6:9]
-        state_dot[3:6] = self.u[1:4]
+        state_dot[3:6] = np.dot(self.change_matrix(),self.u[1:4])
         state_dot[6:9] = np.array([0,0,g]) - np.dot(RR, np.array([0,0,self.u[0]]))/self.m
         return state_dot
 
     def wrap_angle(self, val):
         return( ( val + pi) % (2 * pi ) - pi )
+
+    def change_matrix(self):
+        # convert angular velocities to euler rates
+        angles = self.state[3:6]
+        cphi = cos(angles[0])
+        ctheta = cos(angles[1])
+        sphi = sin(angles[0])
+        stheta = sin(angles[1])
+        ttheta = stheta/ctheta
+        R = np.array([[1,sphi*ttheta,cphi*ttheta],[0,cphi,-stheta],[0,sphi/ctheta,cphi/ctheta]])
+        return R
