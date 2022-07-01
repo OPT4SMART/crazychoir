@@ -26,6 +26,10 @@ class FlatnessPositionCtrl(PositionCtrlStrategy):
         thrust = np.dot(np.dot(RR,F_des),e_3)
 
         # compute desired attitude
+        if not "yaw" in desired_reference:
+            desired_reference["yaw"] = 0.0
+
+
         z_b_des = F_des/norm(F_des)
         x_c_des = np.array([cos(desired_reference["yaw"]),sin(desired_reference["yaw"]),0]).transpose()
         y_b_des = np.cross(z_b_des, x_c_des)/norm(np.cross(z_b_des, x_c_des))
@@ -51,6 +55,10 @@ class FlatnessAccelerationCtrl(FlatnessPositionCtrl):
     def thrust_dir(self, current_pose, desired_reference):
         # compute desired thrust vector
         e_3 = np.array([0,0,1])
-        F_des = self.mass*(g*e_3 + desired_reference["acceleration"])
+        if not "acceleration" in desired_reference:
+            desired_reference["acceleration"] = np.zeros(3)
+            
+        F_des = self.mass*(g*e_3 - desired_reference["acceleration"])
+
         return F_des
 
