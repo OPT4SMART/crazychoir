@@ -1,7 +1,8 @@
 import numpy as np
 from scipy.spatial.transform import Rotation as R
-from scipy.constants import g
 from .hierarchical_control import AttitudeCtrlStrategy
+from numpy import cos, sin
+
 
 class GeometryAttitudeCtrl(AttitudeCtrlStrategy):
 
@@ -15,7 +16,6 @@ class GeometryAttitudeCtrl(AttitudeCtrlStrategy):
         self.K_r = 150*np.array([K_r_x, K_r_x, K_r_z])
         self.K_w = 100*np.array([K_w_x, K_w_x, K_w_z])
 
-
     def control(self, current_pose, desired_attitude, desired_reference):
         RR = R.from_quat(current_pose.orientation).as_matrix()
         error = 0.5*(np.dot(desired_attitude.transpose(),RR) - (np.dot(RR.transpose(),desired_attitude)))
@@ -23,6 +23,21 @@ class GeometryAttitudeCtrl(AttitudeCtrlStrategy):
         # dumping angular velocity
         e_w = current_pose.angular
         # angular velocity inputs
-        pqr = - self.K_r*e_r #- self.K_w*e_w
+        omega = - self.K_r*e_r - self.K_w*e_w
+        # angular rates
+        pqr = np.dot(self.change_matrix(current_pose), omega)
         return pqr
+
+    def change_matrix(self, current_pose):
+        # convert angular velocities to euler rates
+        angles = R.from_quat(current_pose.orientation).as_euler('xyz')
+        cphi = cos(angles[0])
+        ctheta = cos(angles[1])
+        sphi = sin(angles[0])
+        stheta = sin(angles[1])
+        ttheta = stheta/ctheta
+        Rot = np.array([[1,sphi*ttheta,cphi*ttheta],[0,cphi,-stheta],[0,sphi/ctheta,cphi/ctheta]])
+        return Rot
+
+
 

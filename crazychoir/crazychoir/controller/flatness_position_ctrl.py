@@ -10,8 +10,8 @@ class FlatnessPositionCtrl(PositionCtrlStrategy):
     def __init__(self, update_time):
         super().__init__(update_time)
 
-        self.K_p = 1*np.array([0.2, 0.2, 1.0])
-        self.K_v = 1*np.array([0.3, 0.3, 0.8])
+        self.K_p = 5*np.array([0.2, 0.2, 1.0])
+        self.K_v = 5*np.array([0.3, 0.3, 0.8])
         
         self.mass = 0.027
         
@@ -25,7 +25,7 @@ class FlatnessPositionCtrl(PositionCtrlStrategy):
         e_3 = np.array([0,0,1])
         thrust = np.dot(np.dot(RR,F_des),e_3)
 
-        # compute desired attitude via geometric control
+        # compute desired attitude
         z_b_des = F_des/norm(F_des)
         x_c_des = np.array([cos(desired_reference["yaw"]),sin(desired_reference["yaw"]),0]).transpose()
         y_b_des = np.cross(z_b_des, x_c_des)/norm(np.cross(z_b_des, x_c_des))
@@ -39,7 +39,7 @@ class FlatnessPositionCtrl(PositionCtrlStrategy):
         e_3 = np.array([0,0,1])
         e_p =  current_pose.position - desired_reference["position"]
         e_v =  current_pose.velocity - desired_reference["velocity"]
-        F_des = self.mass*(g*e_3 + desired_reference["acceleration"]) - self.K_p*e_p - self.K_v*e_v
+        F_des = self.mass*(g*e_3 - desired_reference["acceleration"] + self.K_p*e_p + self.K_v*e_v)
         return F_des
 
 

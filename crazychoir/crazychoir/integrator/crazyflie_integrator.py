@@ -42,9 +42,7 @@ class CrazyflieIntegrator(Integrator):
         self.current_pos = np.copy(self.state[0:3])
         self.current_or = R.from_euler('xyz',self.state[3:6]).as_quat()
         self.current_vel = np.copy(self.state[6:9])
-        # self.current_ang_vel = np.copy(self.u[1:4])
 
-        print('position in {}, euler are {}'.format(self.state[0:3],self.state[3:6]*(180/3.14) ))
         self.current_ang_vel = np.dot(np.linalg.inv(self.change_matrix()), self.u[1:4])
 
     def state_dot(self):
@@ -52,9 +50,9 @@ class CrazyflieIntegrator(Integrator):
         # TODO add drag
         RR = R.from_euler('xyz', self.state[3:6]).as_matrix()
         state_dot = np.zeros(9)
-        state_dot[0:3] = self.state[6:9]
-        state_dot[3:6] = np.dot(self.change_matrix(),self.u[1:4])
-        state_dot[6:9] = -np.array([0,0,g]) + np.dot(RR, np.array([0,0,self.u[0]]))/self.m
+        state_dot[0:3] = np.copy(self.state[6:9])
+        state_dot[3:6] = np.copy(self.u[1:4])
+        state_dot[6:9] = np.array([0,0,g]) - np.dot(RR, np.array([0,0,self.u[0]]))/self.m
         return state_dot
 
     def wrap_angle(self, val):

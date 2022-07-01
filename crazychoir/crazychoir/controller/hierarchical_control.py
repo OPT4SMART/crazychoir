@@ -1,6 +1,6 @@
 from choirbot.controller import Controller
 from ..crazyflie_communication import SenderStrategy
-from ..crazyflie_planning import TrajHandlerStrategy
+from ..planner import TrajHandlerStrategy
 from geometry_msgs.msg import Twist 
 from scipy.spatial.transform import Rotation as R
 from scipy.constants import g
