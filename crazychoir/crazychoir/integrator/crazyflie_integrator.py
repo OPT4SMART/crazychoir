@@ -42,7 +42,10 @@ class CrazyflieIntegrator(Integrator):
         self.current_pos = np.copy(self.state[0:3])
         self.current_or = R.from_euler('xyz',self.state[3:6]).as_quat()
         self.current_vel = np.copy(self.state[6:9])
-        self.current_ang_vel = np.copy(self.u[1:4])
+        # self.current_ang_vel = np.copy(self.u[1:4])
+
+        print('position in {}, euler are {}'.format(self.state[0:3],self.state[3:6]*(180/3.14) ))
+        self.current_ang_vel = np.dot(np.linalg.inv(self.change_matrix()), self.u[1:4])
 
     def state_dot(self):
         # State space representation: [x y z phi theta psi x_dot y_dot z_dot phi_dot theta_dot psi_dot]
@@ -51,7 +54,7 @@ class CrazyflieIntegrator(Integrator):
         state_dot = np.zeros(9)
         state_dot[0:3] = self.state[6:9]
         state_dot[3:6] = np.dot(self.change_matrix(),self.u[1:4])
-        state_dot[6:9] = np.array([0,0,g]) - np.dot(RR, np.array([0,0,self.u[0]]))/self.m
+        state_dot[6:9] = -np.array([0,0,g]) + np.dot(RR, np.array([0,0,self.u[0]]))/self.m
         return state_dot
 
     def wrap_angle(self, val):
@@ -59,7 +62,7 @@ class CrazyflieIntegrator(Integrator):
 
     def change_matrix(self):
         # convert angular velocities to euler rates
-        angles = self.state[3:6]
+        angles = np.copy(self.state[3:6])
         cphi = cos(angles[0])
         ctheta = cos(angles[1])
         sphi = sin(angles[0])
