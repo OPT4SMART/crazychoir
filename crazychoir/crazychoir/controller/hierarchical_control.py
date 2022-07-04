@@ -23,15 +23,11 @@ class AttitudeCtrlStrategy:
         raise NotImplementedError
 
 
-class HierarchicalController(Controller):
-
+class CrazyflieController(Controller):
     def __init__(self, pos_handler: str=None, pos_topic: str=None, 
-                position_strategy: PositionCtrlStrategy=None, attitude_strategy: AttitudeCtrlStrategy=None, 
                 command_sender: SenderStrategy=None, traj_handler: TrajHandlerStrategy=None):
         
         super().__init__(pos_handler, pos_topic)
-
-        self.publisher_ = self.create_publisher(Twist, 'cmd_vel', 1)
 
         self.traj_handler = traj_handler
 
@@ -41,12 +37,25 @@ class HierarchicalController(Controller):
         self.position_strategy = position_strategy
         self.attitude_strategy = attitude_strategy
         self.command_sender = command_sender
+        if self.command_sender is None:
+            raise ValueError("A command sender is required ")
+        
+
+class HierarchicalController(CrazyflieController):
+
+    def __init__(self, pos_handler: str=None, pos_topic: str=None, 
+                position_strategy: PositionCtrlStrategy=None, attitude_strategy: AttitudeCtrlStrategy=None, 
+                command_sender: SenderStrategy=None, traj_handler: TrajHandlerStrategy=None):
+        
+        super().__init__(pos_handler, pos_topic, command_sender, traj_handler)
+
+        self.publisher_ = self.create_publisher(Twist, 'cmd_vel', 1)
+
+        self.position_strategy = position_strategy
+        self.attitude_strategy = attitude_strategy
 
         if self.position_strategy is None:
             raise ValueError("A position controller is required ")
-        
-        if self.command_sender is None:
-            raise ValueError("A command sender is required ")
         
         if self.attitude_strategy is not None and not np.isclose(self.attitude_strategy.update_time, self.command_sender.send_freq):
             raise ValueError("AttitudeCtrlStrategy.update_time and SenderStrategy.send_freq must be equal")

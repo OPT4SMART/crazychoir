@@ -1,3 +1,4 @@
+from .hierarchical_control import CrazyflieController
 from .hierarchical_control import HierarchicalController
 from .hierarchical_control import PositionCtrlStrategy
 from .hierarchical_control import AttitudeCtrlStrategy
