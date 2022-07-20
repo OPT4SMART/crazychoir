@@ -34,8 +34,6 @@ class CrazyflieController(Controller):
         if self.traj_handler is not None:
             self.subscriber = self.create_subscription(self.traj_handler.msg_type, self.traj_handler.topic, self.traj_handler.handler_func, 1)
 
-        self.position_strategy = position_strategy
-        self.attitude_strategy = attitude_strategy
         self.command_sender = command_sender
         if self.command_sender is None:
             raise ValueError("A command sender is required ")
