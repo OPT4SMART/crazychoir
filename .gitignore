@@ -84,6 +84,6 @@ qtcreator-*
 *.DS_Store
 LOCAL*
 
-# ChoiRbot stuff
+# ChoiRbot Dependences
 choirbot/
 choirbot_interfaces/
