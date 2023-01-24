@@ -7,13 +7,29 @@ from .hierarchical_control import PositionCtrlStrategy
 
 class FlatnessPositionCtrl(PositionCtrlStrategy):
 
-    def __init__(self, update_time):
+    def __init__(self, vicon: False, update_time):
         super().__init__(update_time)
 
-        self.K_p = 5*np.array([0.2, 0.2, 1.0])
-        self.K_v = 5*np.array([0.3, 0.3, 0.8])
+        # Vicon Flag
+        self.vicon = vicon
         
-        self.mass = 0.027
+        # Control gains
+        if self.vicon:
+            # Vicon parameters
+            self.K_p = np.array([720, 720, 1500])*1e-3
+            self.K_v = np.array([120, 120, 400])*1e-3
+            self.K_i = np.array([0, 0, 0])*1e-3
+        else:
+            # Webots parameters
+            self.K_p = np.array([400, 400, 1250])*1e-3
+            self.K_v = np.array([200, 200, 400])*1e-3
+            self.K_i = np.array([0, 0, 0])*1e-3
+        
+        # Integral action settings
+        self.e_i = 0
+        self.delta_time = 0.01 #100Hz
+
+        self.mass = 0.038
         
 
     def control(self, current_pose, desired_reference):
@@ -43,22 +59,25 @@ class FlatnessPositionCtrl(PositionCtrlStrategy):
         e_3 = np.array([0,0,1])
         e_p =  current_pose.position - desired_reference["position"]
         e_v =  current_pose.velocity - desired_reference["velocity"]
-        F_des = self.mass*(g*e_3 - desired_reference["acceleration"] + self.K_p*e_p + self.K_v*e_v)
+        self.e_i += e_p*self.delta_time
+  
+        F_des = self.mass*(g*e_3 + desired_reference["acceleration"]) - self.K_p*e_p - self.K_v*e_v - self.K_i*self.e_i
         return F_des
 
 
 class FlatnessAccelerationCtrl(FlatnessPositionCtrl):
 
-    def __init__(self, update_time):
-        super().__init__(update_time)
+    def __init__(self, vicon, update_time):
+        super().__init__(vicon, update_time)
 
     def thrust_dir(self, current_pose, desired_reference):
+        
         # compute desired thrust vector
         e_3 = np.array([0,0,1])
         if not "acceleration" in desired_reference:
             desired_reference["acceleration"] = np.zeros(3)
             
-        F_des = self.mass*(g*e_3 - desired_reference["acceleration"])
+        F_des = self.mass*(g*e_3 + desired_reference["acceleration"])
 
         return F_des
 

@@ -1,17 +1,18 @@
+import numpy as np
+from typing import Callable
+from scipy.constants import g
+from scipy.spatial.transform import Rotation as R
+from geometry_msgs.msg import Twist 
 from choirbot.controller import Controller
 from ..crazyflie_communication import SenderStrategy
 from ..planner import TrajHandlerStrategy
-from geometry_msgs.msg import Twist 
-from scipy.spatial.transform import Rotation as R
-from scipy.constants import g
-import numpy as np
 
 
 class PositionCtrlStrategy:
     def __init__(self, update_time):
         self.update_time = update_time
 
-    def control(self, current_pose, desired_reference):
+    def control(self, agent_id, current_pose, desired_reference):
         raise NotImplementedError
 
 
@@ -19,16 +20,17 @@ class AttitudeCtrlStrategy:
     def __init__(self, update_time):
         self.update_time = update_time
 
-    def control(self, current_pose, desired_attitude, desired_reference):
+    def control(self, agent_id, current_pose, desired_attitude, desired_reference):
         raise NotImplementedError
 
 
 class CrazyflieController(Controller):
-    def __init__(self, pos_handler: str=None, pos_topic: str=None, 
+    def __init__(self, pose_handler: str=None, pose_topic: str=None, pose_callback: Callable=None,
                 command_sender: SenderStrategy=None, traj_handler: TrajHandlerStrategy=None):
         
-        super().__init__(pos_handler, pos_topic)
-
+        super().__init__(pose_handler, pose_topic, pose_callback)
+        
+        self.mass = 0.038
         self.traj_handler = traj_handler
 
         if self.traj_handler is not None:
@@ -41,11 +43,11 @@ class CrazyflieController(Controller):
 
 class HierarchicalController(CrazyflieController):
 
-    def __init__(self, pos_handler: str=None, pos_topic: str=None, 
+    def __init__(self, pose_handler: str=None, pose_topic: str=None, pose_callback: Callable=None,
                 position_strategy: PositionCtrlStrategy=None, attitude_strategy: AttitudeCtrlStrategy=None, 
                 command_sender: SenderStrategy=None, traj_handler: TrajHandlerStrategy=None):
         
-        super().__init__(pos_handler, pos_topic, command_sender, traj_handler)
+        super().__init__(pose_handler, pose_topic, pose_callback, command_sender, traj_handler)
 
         self.publisher_ = self.create_publisher(Twist, 'cmd_vel', 1)
 
@@ -64,10 +66,11 @@ class HierarchicalController(CrazyflieController):
             self.position_ctrl_timer = self.create_timer(1.0/self.position_strategy.update_time, self.position_controller)
             self.attitude_send_timer = self.create_timer(1.0/self.command_sender.send_freq, self.attitude_send_controller)
 
-        self.thrust = 0.027*g
+        self.thrust = self.mass*g
         self.desired_attitude = R.from_euler('xyz', np.zeros(3))
         self.pqr = np.zeros(3)
 
+        self.reference_lost = True
         self.desired_reference = {}
 
         self.desired_reference["position"] = np.zeros(3)
@@ -80,14 +83,23 @@ class HierarchicalController(CrazyflieController):
         self.attitude_send_controller()
 
     def position_controller(self):
-        if self.current_pose.position is not None:
-            if self.traj_handler is not None:
+        if self.current_pose.position is not None and self.current_pose.velocity is not None:
+            if self.traj_handler is not None and bool(self.traj_handler.get_desired_reference()): # #NOTE and (there is a desired reference)
                 self.desired_reference = self.traj_handler.get_desired_reference()
+                self.reference_lost = True
+            else:
+                if self.reference_lost:
+                    self.reference_lost = False
+                    self.desired_reference["position"] = np.copy(self.current_pose.position)
+                    self.desired_reference["velocity"] = np.zeros(3)
+                    self.desired_reference["acceleration"] = np.zeros(3)
+                    self.desired_reference["yaw"] = 0.0
+
             self.thrust, self.desired_attitude = self.position_strategy.control(self.current_pose, self.desired_reference)
 
     def attitude_send_controller(self):
-        if self.current_pose.position is not None:
-            if self.traj_handler is not None:
+        if self.current_pose.position is not None and self.current_pose.velocity is not None:
+            if self.traj_handler is not None and bool(self.traj_handler.get_desired_reference()): # #NOTE and (there is a desired reference)
                 self.desired_reference = self.traj_handler.get_desired_reference()
             if self.attitude_strategy is not None:
                 self.pqr = self.attitude_strategy.control(self.current_pose, self.desired_attitude, self.desired_reference)

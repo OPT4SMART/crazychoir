@@ -6,15 +6,20 @@ from numpy import cos, sin
 
 class GeometryAttitudeCtrl(AttitudeCtrlStrategy):
 
-    def __init__(self, update_time):
+    def __init__(self, vicon: False, update_time):
         super().__init__(update_time)
 
-        K_r_z = 10**(-4)
-        K_w_z = 10**(-4)
-        K_r_x = 80*10**(-4)
-        K_w_x = 8*10**(-4)
-        self.K_r = 150*np.array([K_r_x, K_r_x, K_r_z])
-        self.K_w = 100*np.array([K_w_x, K_w_x, K_w_z])
+        # Vicon flag
+        self.vicon = vicon
+
+        if self.vicon:
+            # Vicon parameters
+            self.K_r = np.array([ 12000, 12000, 8000])*1e-3
+            self.K_w = np.array([ 100, 100, 80])*1e-3
+        else:
+            # Webots parameters
+            self.K_r = np.array([16000, 16000, 200])*1e-3
+            self.K_w = np.array([ 560,  560,  70])*1e-3
 
     def control(self, current_pose, desired_attitude, desired_reference):
         RR = R.from_quat(current_pose.orientation).as_matrix()
