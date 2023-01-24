@@ -18,7 +18,7 @@ class CrazyflieIntegrator(Integrator):
         self.current_ang_vel = np.zeros(3)
         self.subscription = self.create_subscription(Twist, 'cmd_vel', self.input_callback, 1)
 
-        self.m = 0.027
+        self.mass = 0.038
         self.dt = 1.0/integration_freq
 
         self.state = np.zeros(9)
@@ -28,7 +28,7 @@ class CrazyflieIntegrator(Integrator):
         self.get_logger().info('Integrator {} started'.format(self.agent_id))
 
         # initialize input to hover
-        self.u = np.array([self.m*g,0.0,0.0,0.0])
+        self.u = np.array([self.mass*g,0.0,0.0,0.0])
     
     def input_callback(self, msg):
         # save received input
@@ -52,7 +52,7 @@ class CrazyflieIntegrator(Integrator):
         state_dot = np.zeros(9)
         state_dot[0:3] = np.copy(self.state[6:9])
         state_dot[3:6] = np.copy(self.u[1:4])
-        state_dot[6:9] = np.array([0,0,g]) - np.dot(RR, np.array([0,0,self.u[0]]))/self.m
+        state_dot[6:9] = -np.array([0,0,g]) + np.dot(RR, np.array([0,0,self.u[0]]))/self.mass
         return state_dot
 
     def wrap_angle(self, val):
