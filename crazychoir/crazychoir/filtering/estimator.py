@@ -6,7 +6,6 @@ from typing import Callable
 class Estimator(Callable):
 
     def __init__(self):
-        # self.counter = 0
         self.filter_order = 3
         self.poses = {
             'position'              : [np.zeros(3) for i in range(self.filter_order + 1)], # +1 due to current pose
@@ -27,8 +26,6 @@ class Estimator(Callable):
             self.poses["rpy"].pop(0)
 
             if np.linalg.norm(self.current_pose.orientation) < 0.8:
-                # self.get_logger().warn('[cf{}] -- Vicon sample lost'.format(self.agent_id))
-
                 print('WARN: Vicon sample lost')
 
                 self.current_pose.position = np.copy(self.poses["position"][-1])
