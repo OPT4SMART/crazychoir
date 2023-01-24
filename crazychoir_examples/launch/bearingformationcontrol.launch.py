@@ -50,9 +50,9 @@ def generate_launch_description():
             orth_proj[i*dd:i*dd+N-1,j*dd:j*dd+N-1] = np.eye(dd) - g_ij.T @ g_ij
 
     # initialize launch description with rviz executable
-    rviz_config_dir = get_package_share_directory('choirbot_examples')
+    rviz_config_dir = get_package_share_directory('crazychoir_examples')
     rviz_config_file = os.path.join(rviz_config_dir, 'rvizconf.rviz')
-    launch_description = [Node(package='rviz2', node_executable='rviz2', output='screen',
+    launch_description = [Node(package='rviz2', executable='rviz2', output='screen',
     arguments=['-d', rviz_config_file])]
     
     # add executables for each robot
@@ -67,28 +67,33 @@ def generate_launch_description():
         # guidance
         launch_description.append(Node(
             package='crazychoir_examples',
-            node_executable='crazychoir_bearingformationcontrol_guidance', 
+            executable='crazychoir_bearingformationcontrol_guidance', 
             output='screen',
-            node_namespace='agent_{}'.format(i),
+            namespace='agent_{}'.format(i),
             parameters=[{'agent_id': i, 'N': N, 'dd': dd, 'in_neigh': in_neighbors, 'out_neigh': out_neighbors, 'is_leader': is_leader, 'ort_proj': orth_proj_array}]))
 
         # controller
         launch_description.append(Node(
-            package='crazychoir_examples', node_executable='crazychoir_bearingformationcontrol_controller', output='screen',
-            node_namespace='agent_{}'.format(i),
+            package='crazychoir_examples', 
+            executable='crazychoir_bearingformationcontrol_controller', 
+            output='screen',
+            namespace='agent_{}'.format(i),
             parameters=[{'agent_id': i}]))
 
         # integrator
         launch_description.append(Node(
-            package='crazychoir_examples', node_executable='crazychoir_bearingformationcontrol_integrator', 
+            package='crazychoir_examples', 
+            executable='crazychoir_bearingformationcontrol_integrator', 
             output='screen',
-            node_namespace='agent_{}'.format(i),
+            namespace='agent_{}'.format(i),
             parameters=[{'agent_id': i, 'init_pos': position}]))
 
         # RVIZ visualization
         launch_description.append(Node(
-            package='choirbot_examples', node_executable='choirbot_containment_rviz', output='screen',
-            node_namespace='agent_{}'.format(i),
+            package='crazychoir_examples', 
+            executable='crazychoir_bearingformationcontrol_rviz', 
+            output='screen',
+            namespace='agent_{}'.format(i),
             parameters=[{'agent_id': i}]))
 
     return LaunchDescription(launch_description)

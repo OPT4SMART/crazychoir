@@ -4,7 +4,7 @@ from glob import glob
 
 package_name = 'crazychoir_examples'
 scripts = {
-    'bearingformationcontrol': ['integrator', 'controller', 'guidance'],
+    'bearingformationcontrol': ['controller','guidance','integrator','rviz'],
     }
 setup(
     name=package_name,
@@ -15,8 +15,9 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         ('share/' + package_name, glob('launch/*.launch.py')),
+        ('share/' + package_name, glob('resource/*.rviz')),
     ],
-    install_requires=['setuptools','crazychoir','choirbot_examples'],
+    install_requires=['setuptools','crazychoir'],
     zip_safe=True,
     maintainer='opt4smart',
     maintainer_email='opt4smart@todo.todo',
