@@ -1,0 +1,7 @@
+area_settings:
+  paint_square_size:
+  - 2
+  - 2
+data_storage:
+  polynomials_directory: saves/poly
+  trajectory_directory: saves/trajectory
