@@ -24,18 +24,20 @@ def generate_launch_description():
     # generate initial positions
     P = np.zeros((N, 3))
     # fix static leader positions
-    P[0,0:3] = np.array([1.0, 0.0, 0.0])
-    P[1,0:3] = np.array([2.0, 0.0, 0.0])
+    P[0,0:3] = np.array([1.0, 0.0, 1.0])
+    P[1,0:3] = np.array([2.0, 0.0, 1.0])
+    P[2,0:3] = np.array([0.0, 0.0, 1.0])
+    P[3,0:3] = np.array([0.0, 0.0, 1.0])
     # set random follower positions on x-y plane
     P[2:4,0:2] = 2.0*np.random.rand(2,2)
 
     # compute orthogonal projection matrix
     # generate coordinates of a square to evaluate desired bearings
     D = np.zeros((N, 3))
-    D[0,0:3] = np.array([-1, -1, 0])
-    D[1,0:3] = np.array([ 1, -1, 0])
-    D[2,0:3] = np.array([ 1,  1, 0])
-    D[3,0:3] = np.array([-1,  1, 0])
+    D[0,0:3] = np.array([-1, -1, 1])
+    D[1,0:3] = np.array([ 1, -1, 1])
+    D[2,0:3] = np.array([ 1,  1, 1])
+    D[3,0:3] = np.array([-1,  1, 1])
     dd = np.size(D,1)
 
     orth_proj = np.zeros((dd*N, dd*N))
