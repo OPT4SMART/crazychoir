@@ -20,7 +20,7 @@ colcon build --symlink-install
 
 
 ## Constributors
-**ChoiRbot** is developed by
+**CrazyChoir** is developed by
 [Lorenzo Pichierri](https://www.unibo.it/lorenzo.pichierri/),
 [Andrea Testa](https://www.unibo.it/sitoweb/a.testa) and
 [Giuseppe Notarstefano](https://www.unibo.it/sitoweb/giuseppe.notarstefano)
