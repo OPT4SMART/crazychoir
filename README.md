@@ -3,7 +3,7 @@
 | Documentation pages are currently being uploaded. The latest version will be available soon. |
 
 **CrazyChoir** is a ROS 2 toolbox allowing users to run simulations and experiments on swarms of Crazyflie nano-quadrotors.
-**CrazyChoiR** implements several tools to model swarms of Crazyflie nano-quadrotors and to run distributed, complex tasks both in simulation and experiments. Examples include formation control, and task assignment and trajectory tracking settings.
+**CrazyChoiR** implements several tools to model swarms of Crazyflie nano-quadrotors and to run distributed, complex tasks both in simulation and experiments. Examples include task assignment, formation control and trajectory tracking settings.
 
 ## Requirements and Installation
 **CrazyChoir** requires ROS 2 Foxy to be installed on your system.
@@ -19,7 +19,7 @@ colcon build --symlink-install
 ```
 
 
-## Constributors
+## Contributors
 **CrazyChoir** is developed by
 [Lorenzo Pichierri](https://www.unibo.it/lorenzo.pichierri/),
 [Andrea Testa](https://www.unibo.it/sitoweb/a.testa) and
