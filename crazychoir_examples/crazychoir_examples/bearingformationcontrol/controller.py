@@ -6,10 +6,9 @@ from crazychoir.crazyflie_communication import FPQRSender
 def main():
     rclpy.init()
 
-    vicon = False
     frequency = 100
-    position_ctrl = FlatnessAccelerationCtrl(vicon, frequency)
-    attitude_ctrl = GeometryAttitudeCtrl(vicon, frequency)
+    position_ctrl = FlatnessAccelerationCtrl(frequency)
+    attitude_ctrl = GeometryAttitudeCtrl(frequency)
     sender = FPQRSender(frequency)
     desired_acceleration = AccelerationTraj()
 

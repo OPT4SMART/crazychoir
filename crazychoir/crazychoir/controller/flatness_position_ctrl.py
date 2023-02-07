@@ -7,7 +7,7 @@ from .hierarchical_control import PositionCtrlStrategy
 
 class FlatnessPositionCtrl(PositionCtrlStrategy):
 
-    def __init__(self, vicon: False, update_time):
+    def __init__(self, update_time, vicon: False):
         super().__init__(update_time)
 
         # Vicon Flag
