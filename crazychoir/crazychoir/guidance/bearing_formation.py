@@ -1,12 +1,10 @@
+from typing import Callable
 import numpy as np
 from geometry_msgs.msg import Vector3
 from std_msgs.msg import Empty
 from trajectory_msgs.msg import JointTrajectory as Trajectory, JointTrajectoryPoint as TrajectoryPoint
 
 from .distributed_control import DistributedControl
-
-# Set Take-off height
-HEIGHT = 1.0
 
 class BearingFormation(DistributedControl):
     """
@@ -15,8 +13,8 @@ class BearingFormation(DistributedControl):
     Implements a bearing-based formation control law for second order systems.
     """
     def __init__(self, update_frequency: float,
-                 pose_handler: str=None, pose_topic: str=None, input_topic = 'acceleration'):
-        super().__init__(update_frequency, pose_handler, pose_topic, input_topic)
+                 pose_handler: str=None, pose_topic: str=None, pose_callback: Callable=None, input_topic = 'acceleration'):
+        super().__init__(update_frequency, pose_handler, pose_topic, pose_callback, input_topic)
 
         self.is_leader = self.get_parameter('is_leader').value
         self.agent_dim = self.get_parameter('dd').value
@@ -52,13 +50,13 @@ class BearingFormation(DistributedControl):
         self.experiment_trigger_subscription = self.create_subscription(Empty, '/experiment_trigger', self.start_experiment, 10)
 
         # Subscription to trajectory topic
-        topic = 'traj_params'.format(self.agent_id)
-        self.publishers_traj_params = self.create_publisher(Trajectory, topic, 1)
+        self.publishers_traj_params = self.create_publisher(Trajectory, 'traj_params', 1)
 
         # FSM Variables
+        self.height = 1.0
         self.formation = False
         self.takeoff = False
-        self.take_off_started = False
+        self.takeoff_started = False
         self.takeoff_pos = np.zeros(3)
         self.landing = False
         self.land_started = False
@@ -75,16 +73,16 @@ class BearingFormation(DistributedControl):
 
         if self.current_pose.position is not None and self.current_pose.velocity is not None:
             if self.takeoff:
-                if self.take_off_started:
+                if self.takeoff_started:
                     if self.is_leader:
-                        self.leaders_takeoff(HEIGHT)
+                        self.leaders_takeoff(self.height)
 
                     self.err_int = np.zeros(3)
-                    self.take_off_started = False
+                    self.takeoff_started = False
                     x_des, y_des, z_des = self.current_pose.position
                     self.takeoff_pos = np.array([x_des,y_des,z_des])
 
-                if self.takeoff_pos[2] <= HEIGHT:
+                if self.takeoff_pos[2] <= self.height:
                     self.takeoff_pos[2] += 1/self.update_frequency*0.2
 
                 err_pos = self.current_pose.position - self.takeoff_pos
@@ -143,7 +141,7 @@ class BearingFormation(DistributedControl):
         self.landing = False
         self.formation = False
         self.takeoff = True
-        self.take_off_started = True
+        self.takeoff_started = True
 
     def start_land(self, _):
         self.get_logger().info('Starting Landing')

@@ -2,8 +2,7 @@ import numpy as np
 from .trajectory_handler import FullStateTrajHandler
 from scipy.spatial.transform import Rotation as R
 from numpy.polynomial import Polynomial as poly
-from scipy.interpolate import CubicSpline,InterpolatedUnivariateSpline
-import matplotlib.pyplot as plt
+from typing import Callable
 
 
 class Spline(FullStateTrajHandler):
@@ -12,7 +11,7 @@ class Spline(FullStateTrajHandler):
     
     Compute a multi-point trajectory reference based on cubic spline interpolation with fixed initial and final velocities and accelerations. 
     """
-    def __init__(self, update_frequency: float, pose_handler: str=None, pose_topic: str=None, pose_callback: str = None, input_topic = 'fullstate'):
+    def __init__(self, update_frequency: float, pose_handler: str=None, pose_topic: str=None, pose_callback: Callable = None, input_topic = 'fullstate'):
 
         super().__init__(update_frequency, pose_handler, pose_topic, pose_callback, input_topic)
         

@@ -6,5 +6,5 @@ Thus, import the the desired plugin as 'MotorCtrl'
 
 # TODO: Improve this mechanism
 
-# from .motor_ctrl_fpqr import MotorCtrlFPQR as MotorCtrl
-from .motor_ctrl_xyz import MotorCtrlXYZ as MotorCtrl
+from .motor_ctrl_fpqr import MotorCtrlFPQR as MotorCtrl
+# from .motor_ctrl_xyz import MotorCtrlXYZ as MotorCtrl

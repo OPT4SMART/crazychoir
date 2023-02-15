@@ -1,6 +1,3 @@
-import time
-from math import cos, sin, degrees, radians, pi
-from scipy.constants import g
 from typing import Callable
 
 from rclpy.node import Node
@@ -16,7 +13,6 @@ import cflib.crtp
 from cflib.crazyflie.swarm import CachedCfFactory
 from cflib.crazyflie.log import LogConfig
 from cflib.crazyflie.swarm import Swarm
-
 
 
 class RadioHandler(Node):

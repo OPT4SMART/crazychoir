@@ -6,14 +6,14 @@ from crazychoir_interfaces.msg import FullState
 from geometry_msgs.msg import Vector3
 from trajectory_msgs.msg import JointTrajectory as Trajectory, JointTrajectoryPoint as TrajectoryPoint
 
-import numpy as np
+from typing import Callable
 
 class TrajectoryHandler(Node):
     """
     #TODO
     """
 
-    def __init__(self, pose_handler: str=None, pose_topic: str=None, pose_callback: str = None):
+    def __init__(self, pose_handler: str=None, pose_topic: str=None, pose_callback: Callable = None):
         """
         Args:
             pose_handler (str, optional): Pose handler (see
@@ -65,7 +65,7 @@ class AccelerationTrajHandler(TrajectoryHandler):
     #TODO
     '''
 
-    def __init__(self, update_frequency: float, pose_handler: str=None, pose_topic: str=None, pose_callback: str = None, input_topic: str = 'acceleration'):
+    def __init__(self, update_frequency: float, pose_handler: str=None, pose_topic: str=None, pose_callback: Callable = None, input_topic: str = 'acceleration'):
         
         super().__init__(pose_handler, pose_topic, pose_callback)
         
@@ -89,7 +89,7 @@ class FullStateTrajHandler(TrajectoryHandler):
     #TODO
     '''
 
-    def __init__(self, update_frequency: float, pose_handler: str=None, pose_topic: str=None, pose_callback: str = None, input_topic: str = 'fullstate'):
+    def __init__(self, update_frequency: float, pose_handler: str=None, pose_topic: str=None, pose_callback: Callable = None, input_topic: str = 'fullstate'):
         
         super().__init__(pose_handler, pose_topic, pose_callback)
         

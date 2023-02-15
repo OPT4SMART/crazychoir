@@ -6,7 +6,7 @@ from numpy import cos, sin
 
 class GeometryAttitudeCtrl(AttitudeCtrlStrategy):
 
-    def __init__(self, update_frequency, vicon: False):
+    def __init__(self, update_frequency, vicon= False):
         super().__init__(update_frequency)
 
         # Vicon flag

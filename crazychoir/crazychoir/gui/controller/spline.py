@@ -40,10 +40,6 @@ class DrawSpline:
             n_points = len(t)
             T = [t[i+1]-t[i] for i in range(n_points-1)]
 
-            # LP HERE
-            print("#LP n_points = {} \t t_len = {}\t T = {}\t".format(n_points, len(t), T))
-            # LP HERE
-
             velocity_borders = [0,0]
             acceleration_borders = [0,0]
             coeff = []

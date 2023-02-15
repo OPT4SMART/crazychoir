@@ -1,4 +1,3 @@
-import numpy
 from rclpy.node import Node
 from std_msgs.msg import Empty
 from trajectory_msgs.msg import JointTrajectory as Trajectory, JointTrajectoryPoint as TrajectoryPoint

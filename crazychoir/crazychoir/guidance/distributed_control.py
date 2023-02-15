@@ -1,13 +1,10 @@
 from choirbot.guidance import Guidance
 from geometry_msgs.msg import Vector3
-
-import numpy as np
-from time import sleep
-
+from typing import Callable
 
 class DistributedControl(Guidance):
 
-    def __init__(self, update_frequency: float, pose_handler: str=None, pose_topic: str=None, pose_callback: str=None, input_topic: str = 'acceleration'):
+    def __init__(self, update_frequency: float, pose_handler: str=None, pose_topic: str=None, pose_callback: Callable=None, input_topic: str = 'acceleration'):
         super().__init__(pose_handler, pose_topic, pose_callback)
         self.publisher_ = self.create_publisher(Vector3, input_topic, 1)
         self.update_frequency = update_frequency

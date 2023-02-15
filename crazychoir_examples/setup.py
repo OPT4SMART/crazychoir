@@ -5,6 +5,7 @@ from glob import glob
 package_name = 'crazychoir_examples'
 scripts = {
     'bearingformationcontrol': ['controller','guidance','integrator','rviz'],
+    'formation_webots': ['controller_leaders','controller_followers','gui','guidance','trajectory'],
     }
 setup(
     name=package_name,
@@ -16,6 +17,9 @@ setup(
         ('share/' + package_name, ['package.xml']),
         ('share/' + package_name, glob('launch/*.launch.py')),
         ('share/' + package_name, glob('resource/*.rviz')),
+        ('share/' + package_name, glob('resource/*.urdf')),
+        ('share/' + package_name + '/worlds', glob('worlds/*.wbt')),
+        ('share/' + package_name + '/worlds/meshes', glob('worlds/meshes/*.stl')),
     ],
     install_requires=['setuptools','crazychoir'],
     zip_safe=True,
