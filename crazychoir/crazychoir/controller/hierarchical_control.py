@@ -9,16 +9,16 @@ from ..planner import TrajHandlerStrategy
 
 
 class PositionCtrlStrategy:
-    def __init__(self, update_time):
-        self.update_time = update_time
+    def __init__(self, update_frequency):
+        self.update_frequency = update_frequency
 
     def control(self, agent_id, current_pose, desired_reference):
         raise NotImplementedError
 
 
 class AttitudeCtrlStrategy:
-    def __init__(self, update_time):
-        self.update_time = update_time
+    def __init__(self, update_frequency):
+        self.update_frequency = update_frequency
 
     def control(self, agent_id, current_pose, desired_attitude, desired_reference):
         raise NotImplementedError
@@ -57,13 +57,13 @@ class HierarchicalController(CrazyflieController):
         if self.position_strategy is None:
             raise ValueError("A position controller is required ")
         
-        if self.attitude_strategy is not None and not np.isclose(self.attitude_strategy.update_time, self.command_sender.send_freq):
-            raise ValueError("AttitudeCtrlStrategy.update_time and SenderStrategy.send_freq must be equal")
+        if self.attitude_strategy is not None and not np.isclose(self.attitude_strategy.update_frequency, self.command_sender.send_freq):
+            raise ValueError("AttitudeCtrlStrategy.update_frequency and SenderStrategy.send_freq must be equal")
 
-        if self.attitude_strategy is not None and np.isclose(self.position_strategy.update_time, self.attitude_strategy.update_time):
-            self.ctrl_timer = self.create_timer(1.0/self.position_strategy.update_time, self.controller)
+        if self.attitude_strategy is not None and np.isclose(self.position_strategy.update_frequency, self.attitude_strategy.update_frequency):
+            self.ctrl_timer = self.create_timer(1.0/self.position_strategy.update_frequency, self.controller)
         else:
-            self.position_ctrl_timer = self.create_timer(1.0/self.position_strategy.update_time, self.position_controller)
+            self.position_ctrl_timer = self.create_timer(1.0/self.position_strategy.update_frequency, self.position_controller)
             self.attitude_send_timer = self.create_timer(1.0/self.command_sender.send_freq, self.attitude_send_controller)
 
         self.thrust = self.mass*g

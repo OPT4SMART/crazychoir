@@ -7,8 +7,8 @@ from .hierarchical_control import PositionCtrlStrategy
 
 class FlatnessPositionCtrl(PositionCtrlStrategy):
 
-    def __init__(self, update_time, vicon: False):
-        super().__init__(update_time)
+    def __init__(self, update_frequency, vicon: False):
+        super().__init__(update_frequency)
 
         # Vicon Flag
         self.vicon = vicon
@@ -67,8 +67,8 @@ class FlatnessPositionCtrl(PositionCtrlStrategy):
 
 class FlatnessAccelerationCtrl(FlatnessPositionCtrl):
 
-    def __init__(self, vicon, update_time):
-        super().__init__(vicon, update_time)
+    def __init__(self, vicon, update_frequency):
+        super().__init__(vicon, update_frequency)
 
     def thrust_dir(self, current_pose, desired_reference):
         
