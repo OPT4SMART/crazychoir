@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <robot name="Crazyflie">
     <webots>
-        <plugin type="crazychoir.webots_plugin.MotorCtrl" />
+        <plugin type="crazychoir.webots_plugin.MotorCtrlFPQR" />
     </webots>
 </robot>

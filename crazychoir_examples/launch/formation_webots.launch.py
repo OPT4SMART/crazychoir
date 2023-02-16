@@ -13,7 +13,7 @@ node_frequency = 100 # [Hz]
 package_dir = get_package_share_directory('crazychoir_examples')
 
 def get_cf_driver(agent_id):
-    robot_description = pathlib.Path(os.path.join(package_dir, 'crazyflie.urdf')).read_text()
+    robot_description = pathlib.Path(os.path.join(package_dir, 'crazyflie_fpqr.urdf')).read_text()
 
     crazyflie_driver = Node(
         package='webots_ros2_driver',

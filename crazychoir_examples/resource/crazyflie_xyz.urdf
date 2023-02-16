@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<robot name="Crazyflie">
+    <webots>
+        <plugin type="crazychoir.webots_plugin.MotorCtrlXYZ" />
+    </webots>
+</robot>

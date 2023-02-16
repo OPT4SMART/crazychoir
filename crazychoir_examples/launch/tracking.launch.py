@@ -32,7 +32,7 @@ def generate_launch_description():
     launch_description.append(webots)
 
     # webots exec
-    robot_description = pathlib.Path(os.path.join(package_dir, 'crazyflie.urdf')).read_text()
+    robot_description = pathlib.Path(os.path.join(package_dir, 'crazyflie_fpqr.urdf')).read_text()
     launch_description.append(Node(
         package='webots_ros2_driver',
         executable='driver',
