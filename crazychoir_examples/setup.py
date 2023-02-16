@@ -4,7 +4,7 @@ from glob import glob
 
 package_name = 'crazychoir_examples'
 scripts = {
-    'bearingformationcontrol': ['controller','guidance','integrator','rviz'],
+    'formation_rviz': ['controller','guidance','integrator','rviz'],
     'formation_webots': ['controller_leaders','controller_followers','gui','guidance','trajectory'],
     'tracking': ['controller','guidance','gui','trajectory'],
     'tracking_vicon': ['controller','guidance','gui','radio','trajectory'],
