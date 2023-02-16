@@ -1,5 +1,5 @@
 """
-The .urdf file of the Crazyflie needs the Module 'MotorCtrl' to link the 
+The .urdf file of the Crazyflie needs the Module 'MotorCtrl*' to link the 
 motor controller plugin to the webots model. 
 """
 

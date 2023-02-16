@@ -13,7 +13,7 @@ class SimpleGuidance(Node):
 
     def __init__(self, pose_handler: str=None, pose_topic: str=None, pose_callback: Callable=None):
 
-        super().__init__('guidance', allow_undeclared_parameters=True,
+        super().__init__('simple_guidance', allow_undeclared_parameters=True,
             automatically_declare_parameters_from_overrides=True)
         
         # get parameters
