@@ -21,7 +21,7 @@ def generate_launch_description():
     # Launch control Panel
     launch_description.append(Node(
                 package='crazychoir_examples', 
-                executable='crazychoir_tracking_gui',
+                executable='crazychoir_tracking_webots_gui',
                 output='screen',
                 parameters=[{
                     'n_agents': 1,
@@ -56,7 +56,7 @@ def generate_launch_description():
     # controller
     launch_description.append(Node(
         package='crazychoir_examples', 
-        executable='crazychoir_tracking_controller', 
+        executable='crazychoir_tracking_webots_controller', 
         namespace='agent_0',
         output='screen',
         parameters=[{
@@ -66,7 +66,7 @@ def generate_launch_description():
     # guidance
     launch_description.append(Node(
         package='crazychoir_examples', 
-        executable='crazychoir_tracking_guidance', 
+        executable='crazychoir_tracking_webots_guidance', 
         namespace='agent_0',
         output='screen',
         parameters=[{
@@ -78,7 +78,7 @@ def generate_launch_description():
     # reference
     launch_description.append(Node(
         package='crazychoir_examples',
-        executable='crazychoir_tracking_trajectory', 
+        executable='crazychoir_tracking_webots_trajectory', 
         namespace='agent_0',
         output='screen',
         parameters=[{     
