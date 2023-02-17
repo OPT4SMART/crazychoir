@@ -1,0 +1,3 @@
+[submodule "ChoiRbot"]
+	path = ChoiRbot
+	url = https://github.com/OPT4SMART/ChoiRbot.git
