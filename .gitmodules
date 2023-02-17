@@ -4,3 +4,6 @@
 [submodule "ros2-vicon-receiver"]
 	path = ros2-vicon-receiver
 	url = https://github.com/OPT4SMART/ros2-vicon-receiver.git
+[submodule "webots_ros2"]
+	path = webots_ros2
+	url = https://github.com/cyberbotics/webots_ros2.git
