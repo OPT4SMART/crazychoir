@@ -16,6 +16,8 @@ class BearingFormation(DistributedControl):
                  pose_handler: str=None, pose_topic: str=None, pose_callback: Callable=None, input_topic = 'acceleration'):
         super().__init__(update_frequency, pose_handler, pose_topic, pose_callback, input_topic)
 
+        self.get_logger().info('Guidance {} started'.format(self.agent_id))
+
         self.is_leader = self.get_parameter('is_leader').value
         self.agent_dim = self.get_parameter('dd').value
         self.ort_proj_array = self.get_parameter('ort_proj').value
@@ -31,8 +33,8 @@ class BearingFormation(DistributedControl):
             self.bearing_deriv_gain = np.array([3,3,3])
             self.bearing_int_gain = np.array([0,0,1])
 
-            self.prop_gain = np.array([7200, 7200, 30000])*1e-3
-            self.deriv_gain = np.array([36, 36, 120])*1e-3
+            self.prop_gain = np.array([720, 720, 3000])*1e-3*10
+            self.deriv_gain = np.array([120, 120, 400])*1e-3*30
             self.int_gain = np.array([0, 0, 1000])*1e-3
         else:
             # Webots Parameters
@@ -63,7 +65,7 @@ class BearingFormation(DistributedControl):
         self.landing_pos = np.zeros(3)
 
         # Integral action settings
-        self.delta_int = 0.01 # 100MHz
+        self.delta_int = 0.001 # [ms]
         self.err_int_bearinig = np.zeros(3)
         self.err_int = np.zeros(3)
 

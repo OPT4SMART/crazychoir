@@ -27,6 +27,8 @@ class RadioHandlerXYZ(RadioHandler):
         # print(string)        
         cf.high_level_commander.go_to(x, y, z, yaw, duration, relative)
 
+    def cmd_take_off(self, _):
+        pass
 
     def cmd_stop(self, _):
         self.emergency_stop = True

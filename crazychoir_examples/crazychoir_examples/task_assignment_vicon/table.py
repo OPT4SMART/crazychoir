@@ -22,6 +22,7 @@ def main():
     rclpy.init()
     trigger = TriggerNode()
     rclpy.spin_once(trigger)
+    # rclpy.spin(trigger)
     rclpy.shutdown()
 
 if __name__ == '__main__':

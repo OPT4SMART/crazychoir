@@ -9,7 +9,6 @@ class DistributedControl(Guidance):
         self.publisher_ = self.create_publisher(Vector3, input_topic, 1)
         self.update_frequency = update_frequency
         self.timer = self.create_timer(1.0/self.update_frequency, self.control)
-        self.get_logger().info('Guidance {} started'.format(self.agent_id))
 
     def control(self):
         # skip if position is not available yet
