@@ -10,7 +10,7 @@
 
 To install the toolbox, create a ROS 2 workspace and, inside the `src` directory, run:
 ```
-git clone https://github.com/OPT4SMART/crazychoir.git .
+git clone --recursive https://github.com/OPT4SMART/crazychoir.git .
 ```
 
 Then, from the parent directory execute:
