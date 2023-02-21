@@ -17,6 +17,7 @@ To install the toolbox, navigate inside the `src` directory, run:
 ```
 git clone --recursive https://github.com/OPT4SMART/crazychoir.git .
 ```
+The first command clones all the required 
 
 Then, simply build the workspace:
 ```
@@ -28,17 +29,17 @@ colcon build --symlink-install
 
 **CrazyChoir** requires a set of Python packages that can be installed by running:
 ```  
-  cd ~/dev_ws/src
-	pip3 install -r requirements.txt
+cd ~/dev_ws/src/ChoiRbot
+pip3 install -r requirements.txt
 ```
 
 If you are interested in running distributed optimization algorithms, you also need
 the [DISROPT package](https://github.com/OPT4SMART/disropt).
 You can install it by running:
-
-	pip3 install -r requirements_disropt.txt
-	pip3 install --no-deps disropt
-
+```
+pip3 install -r requirements_disropt.txt
+pip3 install --no-deps disropt
+```
 You could also install disropt by directly running ``pip install disropt``. However,
 this would automatically install additional packages (such as mpi4py) that are
 not required by **CrazyChoir**.
