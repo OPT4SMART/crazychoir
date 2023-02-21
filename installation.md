@@ -13,11 +13,10 @@ If you do not have a ROS 2 workspace run on a terminal:
 	mkdir -p ~/dev_ws/src
 	cd ~/dev_ws/src
 
-To install the toolbox, navigate inside the `src` directory, run:
+To install the toolbox, navigate inside the `src` directory and run:
 ```
 git clone --recursive https://github.com/OPT4SMART/crazychoir.git .
 ```
-The first command clones all the required 
 
 Then, simply build the workspace:
 ```
