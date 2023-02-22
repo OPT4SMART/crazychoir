@@ -28,15 +28,13 @@ colcon build --symlink-install
 
 **CrazyChoir** requires a set of Python packages that can be installed by running:
 ```  
-cd ~/dev_ws/src/ChoiRbot
+cd ~/dev_ws/src/
 pip3 install -r requirements.txt
 ```
 
-If you are interested in running distributed optimization algorithms, you also need
-the [DISROPT package](https://github.com/OPT4SMART/disropt).
-You can install it by running:
+**CrazyChoir** requires a set of API from the [DISROPT package](https://github.com/OPT4SMART/disropt).
+You can install them by running:
 ```
-pip3 install -r requirements_disropt.txt
 pip3 install --no-deps disropt
 ```
 You could also install disropt by directly running ``pip install disropt``. However,
