@@ -8,6 +8,16 @@ Please refer to the [ROS 2 website](https://index.ros.org/doc/ros2/) for a compr
 tutorial on how to install ROS 2. We suggest to perform the *Desktop Install* of ROS 2,
 which provides useful tools such as RVIZ.
 
+**CrazyChoir** has been tested on Webots R2022a. It is possible to download it at [this link](https://github.com/cyberbotics/webots/releases/tag/R2022a).
+
+The following packages are also required to run Webots simulations:
+
+```
+sudo apt install ros-foxy-vision-msgs
+sudo apt install ros-foxy-hardware-interface
+sudo apt install ros-foxy-controller-manager
+```
+
 If you do not have a ROS 2 workspace run on a terminal:
 
 	mkdir -p ~/dev_ws/src
@@ -16,6 +26,14 @@ If you do not have a ROS 2 workspace run on a terminal:
 To install the toolbox, navigate inside the `src` directory and run:
 ```
 git clone --recursive https://github.com/OPT4SMART/crazychoir.git .
+git submodule update --remote --merge ChoiRbot/
+```
+
+Then, install the Vicon required libraries
+
+```
+cd ros2-vicon-receiver
+./install_libs.sh
 ```
 
 Then, simply build the workspace:
@@ -41,5 +59,29 @@ You could also install disropt by directly running ``pip install disropt``. Howe
 this would automatically install additional packages (such as mpi4py) that are
 not required by **CrazyChoir**.
 
-### Setting up the Webots environment
-**CrazyChoir** has been tested on Webots R2022a. It is possible to download it at [this link](https://github.com/cyberbotics/webots/releases/tag/R2022a).
+### Setup of Crazyflie Firmware Bindings
+In order to use some functionalities of the package, it is necessary to build the Crazyflie firmware and create Python bindings of firmware functions.
+We follow the guide at [this link](https://github.com/bitcraze/crazyflie-firmware/blob/master/docs/building-and-flashing/build.md).
+
+In your favourite directory, run
+```
+sudo apt-get install make gcc-arm-none-eabi
+sudo apt install swig
+```
+Then, clone the Crazyflie firmware repository
+```
+git clone --recursive https://github.com/bitcraze/crazyflie-firmware.git
+cd crazyflie-firmware
+git submodule init
+git submodule update
+```
+
+Compile and create the bindings
+```
+make cf2_defconfig
+make -j 12
+make bindings_python
+```
+
+Now, you should have a ```build``` directory containing the file ```cffirmware.py```.
+Copy the path of ```cffirmware.py``` into the file ```~/dev_ws/src/crazychoir/crazychoir/utils/__init__.py``` at Line 3.
