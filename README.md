@@ -1,3 +1,8 @@
+# CrazyChoir 
+[**Website**](https://opt4smart.github.io/crazychoir/)
+| [**Installation**](https://opt4smart.github.io/crazychoir/installation)
+
+
 | :warning: Information for end users |
 |:------------------------------------|
 | Documentation pages are currently being uploaded. The latest version will be available soon. |
