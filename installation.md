@@ -40,3 +40,6 @@ pip3 install --no-deps disropt
 You could also install disropt by directly running ``pip install disropt``. However,
 this would automatically install additional packages (such as mpi4py) that are
 not required by **CrazyChoir**.
+
+### Setting up the Webots environment
+**CrazyChoir** has been tested on Webots R2022a. It is possible to download it at [this link](https://github.com/cyberbotics/webots/releases/tag/R2022a).
