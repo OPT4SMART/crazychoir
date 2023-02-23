@@ -18,11 +18,21 @@ To install the toolbox, create a ROS 2 workspace and, inside the `src` directory
 git clone --recursive https://github.com/OPT4SMART/crazychoir.git .
 ```
 
-Then, from the parent directory execute:
+Some preliminary steps are required to succesfully complete the installation. We refer the reader to [this guide](https://opt4smart.github.io/crazychoir/installation).
+
+After following all the steps, from the workspace parent directory execute:
 ```
 colcon build --symlink-install
 ```
 
+## Examples
+In order to check the installation and start to use **CrazyChoir**, you can run
+
+```
+ros2 launch crazychoir_examples formation_webots.launch.py 
+```
+
+This will start a Webots simulation with 11 Crazyflie nano-quadrotor performing a formation control task.
 
 ## Contributors
 **CrazyChoir** is developed by
