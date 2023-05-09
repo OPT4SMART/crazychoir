@@ -38,6 +38,9 @@ class BearingFormation(DistributedControl):
             self.int_gain = np.array([0, 0, 1000])*1e-3
         else:
             # Webots Parameters
+            # NOTE: if HUGE formation use these values:
+            # self.bearing_prop_gain = np.array([1,1,1])*0.1*0.7
+            # self.bearing_deriv_gain = np.array([1,1,1])*0.5*0.7
             self.bearing_prop_gain = np.array([1,1,1])*0.1*2
             self.bearing_deriv_gain = np.array([1,1,1])*0.5*2
             self.bearing_int_gain = np.array([0,0,0])
