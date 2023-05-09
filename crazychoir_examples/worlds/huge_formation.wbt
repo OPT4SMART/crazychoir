@@ -1,0 +1,4873 @@
+#VRML_SIM R2022a utf8
+
+WorldInfo {
+  basicTimeStep 9.5
+}
+Viewpoint {
+  fieldOfView 0.8
+  orientation -0.4 0.4 0.8 1.75285
+  position 0 -3.2 5.3
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+  luminosity 0
+  castShadows    FALSE
+}
+DirectionalLight {
+  direction 1 1 -1
+  color 0.83 0.83 0.75
+  ambientIntensity 1
+}
+Floor {
+  translation 0 0 0
+  rotation 0 1 0 0
+  size 10 10
+  appearance Appearance {
+    material Material {
+      ambientIntensity 0
+      shininess 0
+    }
+    texture ImageTexture {
+      url [
+        "../../../../../src/crazychoir/crazychoir/utils/images/casy_logo.png"      ]
+      repeatS FALSE
+      repeatT FALSE
+      filtering 0
+    }
+    textureTransform TextureTransform {
+      center 2.5 2.5
+      scale 0.55 0.55
+    }
+  }
+}
+Robot {
+  name "agent_0"
+  translation -3.0 -3.0 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_1"
+  translation -1.5 -3.0 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_2"
+  translation -0.16868618507092037 -2.661250534640936 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_3"
+  translation 1.913255696523005 -2.9219042986943706 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_4"
+  translation 3.1190774058192754 -3.392319123783702 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_5"
+  translation -2.6783354490575753 -1.818001627969136 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_6"
+  translation -1.9649864500827587 -1.4840257858716206 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_7"
+  translation 0.20321468643138185 -1.612663271284615 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_8"
+  translation 1.0959030329053687 -1.730037910082671 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_9"
+  translation 3.147046296444355 -1.7983901887452807 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_10"
+  translation -3.312012957080105 -0.8752482793736074 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_11"
+  translation -1.9721338303370104 -0.6493340838112668 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_12"
+  translation -0.1386830708049197 -0.37514833071356724 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_13"
+  translation 1.5075465162736088 -0.8470266158359173 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_14"
+  translation 2.8633352155936875 -0.27696912550874087 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_15"
+  translation -2.5476622482587015 0.6089557049148844 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_16"
+  translation -1.184291627460248 1.0212914835543874 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_17"
+  translation 0.054670755840840024 0.2057918571562658 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_18"
+  translation 1.1737622748229075 0.5000182052520193 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_19"
+  translation 2.753561528366222 0.764640312140629 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_20"
+  translation -2.7983686536281933 1.815985111373873 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_21"
+  translation -1.1264496273761468 1.4075707203728842 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_22"
+  translation 0.14037110585471957 1.471402315324329 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_23"
+  translation 1.8291421661809157 1.511919374182955 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_24"
+  translation 3.391993935800828 2.047067993091624 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_25"
+  translation -3.4951261094171286 2.7197684673389935 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_26"
+  translation -1.778235248337353 2.6232220606967767 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_27"
+  translation 0.13472832657497213 3.155904356695435 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_28"
+  translation 1.8458208681945938 3.156085087383786 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
+Robot {
+  name "agent_29"
+  translation 3.144517493489535 2.6559789226070043 0.015
+  children [
+    Solid {
+      translation 0 0 -0.015
+      children [
+        DEF motors Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.5 0.5
+            emissiveColor 0.4 0.4 0.4
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motors.stl"
+            ]
+          }
+        }
+        DEF motormounts Shape {
+          appearance PBRAppearance {
+            transparency 0.1
+            metalness 0.2
+            emissiveColor 0.5 0.5 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/4_motormounts.stl"
+            ]
+          }
+        }
+        DEF body Shape {
+          appearance DEF PCB PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.3
+            metalness 0.5
+          }
+          geometry Mesh {
+            url [
+              "meshes/cf_body.stl"
+            ]
+          }
+        }
+      ]
+      name "body"
+    }
+    GPS {
+    }
+    Gyro {
+    }
+    InertialUnit {
+    }
+    DEF m1 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 -0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m1_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation 0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance DEF plastic PBRAppearance {
+              baseColor 0 0 0
+              metalness 0.3
+            }
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m2 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 -0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m2_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 -0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m3 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust -0.031 0.031 0.008
+      thrustConstants -4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m3_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix Solid {
+        translation -0.031 0.031 0.008
+        children [
+          Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/ccw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+    DEF m4 Propeller {
+      shaftAxis 0 0 1
+      centerOfThrust 0.031 0.031 0.008
+      thrustConstants 4e-05 0
+      torqueConstants 2.4e-06 0
+      device RotationalMotor {
+        name "m4_motor"
+        maxVelocity 600
+        maxTorque 30
+      }
+      slowHelix DEF prop Solid {
+        translation 0.031 0.031 0.008
+        children [
+          DEF prop Shape {
+            appearance USE plastic
+            geometry Mesh {
+              url [
+                "meshes/cw_prop.stl"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.03
+    radius 0.05
+  }
+  physics Physics {
+    density -1
+    mass 0.038
+  }
+  controller "<extern>"
+}
