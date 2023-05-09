@@ -9,6 +9,9 @@ class RadioHandlerXYZ(RadioHandler):
 
     def cmd_sender(self, msg, uri, cf):
 
+        # Check safety area
+        self.check_safety_area()
+
         if self.emergency_stop:
             print("[{}] \t  cf{} - STOP PUSHED".format(time.time(), int(uri[-1])))  
             return

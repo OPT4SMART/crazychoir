@@ -1,5 +1,5 @@
 from typing import Callable
-
+import numpy as np
 from rclpy.node import Node
 from std_msgs.msg import Empty
 from geometry_msgs.msg import Twist 
@@ -28,6 +28,10 @@ class RadioHandler(Node):
         self.agent_ids = self.get_parameter('agent_ids').value
         self.cmd_topic = self.get_parameter('cmd_topic').value
 
+        # get_parameter_or return None if not declared
+        self.logger = self.get_parameter_or('logger').value
+        self.log_period = 200 # [ms]
+
         print("Uris associated to this radio   :\t{}".format(self.uris))
         print("Agents associated to this radio :\t{}\n".format(self.agent_ids))
 
@@ -37,6 +41,9 @@ class RadioHandler(Node):
 
         # Initialize Flags
         self.emergency_stop = False
+
+        # Safe zone limits
+        self.safezone_limits = [2,2,2] # [x,y,z] in meters
 
         # Initialize radio drivers
         cflib.crtp.init_drivers()
@@ -52,7 +59,8 @@ class RadioHandler(Node):
             cf = scf.cf
             self.set_values(uri, cf)
             # self.read_values(uri, cf)
-            # self.set_log(uri,cf)
+            if self.logger is not None:
+                self.set_log(uri,cf, self.log_period)
             
         # Unlock startup thrust protection
         for uri, scf in self.swarm._cfs.items():
@@ -73,16 +81,20 @@ class RadioHandler(Node):
             cf = scf.cf
 
             # Poses Subscription
+            self.current_poses = {uri[-1]: Pose(None, None,None, None)}
+            vicon_id = self.uris[i][-1]
+            pose_handler = 'vicon'
+            pose_topic = '/vicon/cf{}/cf{}'.format(vicon_id,vicon_id)
+            pose_callback = None
+
             # TODO: Verify that Kalman Filter works also with fpqr commands
             if self.cmd_topic == 'traj_params': 
-                self.current_poses = {uri[-1]: Pose(None, None,None, None)}
-                vicon_id = self.uris[i][-1]
-                pose_handler = 'vicon'
-                pose_topic = '/vicon/cf{}/cf{}'.format(vicon_id,vicon_id)
+                # This is the case in which we send position goals to cf, hence, we need to send vicon pose to them
                 pose_callback = SendViconPose()
-                self.subscriptions_pose_list[uri[-1]] = pose_subscribe(pose_handler, pose_topic, self, self.current_poses[uri[-1]], pose_callback)
                 pose_callback.set_callback(self.current_poses[uri[-1]],cf)
 
+            self.subscriptions_pose_list[uri[-1]] = pose_subscribe(pose_handler, pose_topic, self, self.current_poses[uri[-1]], pose_callback)
+            
             # Commands Subscription
             agent_id = self.agent_ids[i]
             if self.cmd_topic == 'traj_params':
@@ -106,26 +118,32 @@ class RadioHandler(Node):
     def set_values(self,uri, cf):
         raise NotImplementedError
 
+    def check_safety_area(self):
+        for uri, scf in self.swarm._cfs.items():
+            safezone_ck = [np.abs(self.current_poses[uri[-1]].position.item(i)) > self.safezone_limits[i] for i in range(3)]
+            if any(safezone_ck):
+                self.emergency_stop = True
+                self.get_logger().warn('CF{} KILLED: OUT OF SAFE ZONE'.format(int(uri[-1])))        
+        
     ################################
     # Logging methods
     ################################
 
-    def set_log(self, uri, cf):
+    def set_log(self, uri, cf, log_period_in_ms):
+        """
+        Logging groups and variables retrived from 
+            https://www.bitcraze.io/documentation/repository/crazyflie-firmware/master/api/logs/
+        """
 
         # The definition of the logconfig can be made before connecting
-        self._lg_stab = LogConfig(name='Stabilizer', period_in_ms=100)
-        # self._lg_stab.add_variable('stateEstimate.x', 'float')
-        # self._lg_stab.add_variable('stateEstimate.y', 'float')
-        # self._lg_stab.add_variable('stateEstimate.z', 'float')
-        # self._lg_stab.add_variable('stabilizer.roll', 'float')
-        # self._lg_stab.add_variable('stabilizer.pitch', 'float')
+        self._lg_stab = LogConfig(name='Stabilizer', period_in_ms=log_period_in_ms)
+        self._lg_stab.add_variable('stabilizer.roll', 'float')
+        self._lg_stab.add_variable('stabilizer.pitch', 'float')
         self._lg_stab.add_variable('stabilizer.yaw', 'float')
+        
         # The fetch-as argument can be set to FP16 to save space in the log packet
-        self._lg_stab.add_variable('pm.vbat', 'FP16')
+        # self._lg_stab.add_variable('pm.vbat', 'FP16')
 
-        # Adding the configuration cannot be done until a Crazyflie is
-        # connected, since we need to check that the variables we
-        # would like to log are in the TOC.
         
         try:
             cf.log.add_config(self._lg_stab)
@@ -173,10 +191,8 @@ class SendViconPose(Callable):
         qz = self.current_pose.orientation[2]
         qw = self.current_pose.orientation[3]
 
-        # TODO: Verify
-        # self.cf.extpos.send_extpose(x, y, z, qx/qw, qy/qw, qz/qw, qw/qw)
         self.count += 1
-        if not (self.count % 7): # Send ext pose at 10Hz
+        if not (self.count % 7): # Send ext pose at node_freq/7
             self.cf.extpos.send_extpose(x, y, z, qx, qy, qz, qw)
             # print("[{:.2f}] \t  - cf{} external pose sent!".format(1/(time.time() - self.past_time), self.cf.link_uri[-1]))  
             # self.past_time = time.time()

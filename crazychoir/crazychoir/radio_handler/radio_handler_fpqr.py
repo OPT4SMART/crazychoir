@@ -29,6 +29,9 @@ class RadioHandlerFPQR(RadioHandler):
 
         # TODO: do something during cmd_vel initialization -> cf needs a cmd every 1s
 
+        # Check safety area
+        self.check_safety_area()
+
         cmd_thrust  = np.clip(self.thrust_lim_min, int(msg.linear.z*self.newton2pwm),self.thrust_lim_max) # uint
         cmd_roll    = np.clip(-self.pq_lim,        degrees( msg.angular.x), self.pq_lim) #deg/s
         cmd_pitch   = np.clip(-self.pq_lim,        degrees( msg.angular.y), self.pq_lim) #no minus
@@ -60,4 +63,4 @@ class RadioHandlerFPQR(RadioHandler):
         cf.param.set_value('flightmode.stabModePitch', 0)   # rate(0) angle(1)              -> default 1
         # cf.param.set_value('flightmode.stabModeYaw', 0)     # rate(0) angle(1)              -> default 0
 
-        print("[{}] \t  cf{} - parameters setted!".format(time.time(), int(uri[-1])))        
+        print("[{}] \t  cf{} - parameters set!".format(time.time(), int(uri[-1])))        
