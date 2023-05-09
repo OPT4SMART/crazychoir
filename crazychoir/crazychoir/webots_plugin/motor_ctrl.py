@@ -64,6 +64,9 @@ class MotorCtrl:
         self.initialization = True
         self.emergency_stop = False
 
+        # Safe zone limits
+        self.safezone_limits = [2,2,2] # [x,y,z] in meters
+
     def step(self):
         raise NotImplementedError
 
@@ -78,6 +81,13 @@ class MotorCtrl:
 
     def stop(self,_):
         self.emergency_stop = True
+
+    def check_safety_area(self):
+        safezone_ck = [np.abs(self.current_pose.position.item(i)) > self.safezone_limits[i] for i in range(3)]
+        if any(safezone_ck):
+            self.emergency_stop = True
+            self.cf_driver.get_logger().warn('{} KILLED: OUT OF SAFE ZONE'.format(self.robot_name))        
+        
 
     def update_current_pose(self):
         ## Get measurements

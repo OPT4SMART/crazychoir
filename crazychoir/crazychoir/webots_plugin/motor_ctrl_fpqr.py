@@ -38,7 +38,8 @@ class MotorCtrlFPQR(MotorCtrl):
         self.publish_odometry()
         self.update_cf_state()
         self.update_cf_sensors()
-        
+        self.check_safety_area()
+
         if self.initialization:
             self.initialization = False
             self.init_setpoint()
