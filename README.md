@@ -26,6 +26,6 @@ This will start a Webots simulation with 11 Crazyflie nano-quadrotor performing 
 
 ## Contributors
 **CrazyChoir** is developed by
-[Lorenzo Pichierri](https://www.unibo.it/lorenzo.pichierri/),
+[Lorenzo Pichierri](https://www.unibo.it/sitoweb/lorenzo.pichierri),
 [Andrea Testa](https://www.unibo.it/sitoweb/a.testa) and
 [Giuseppe Notarstefano](https://www.unibo.it/sitoweb/giuseppe.notarstefano)
