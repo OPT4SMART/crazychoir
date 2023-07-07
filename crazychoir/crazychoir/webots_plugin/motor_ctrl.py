@@ -65,7 +65,7 @@ class MotorCtrl:
         self.emergency_stop = False
 
         # Safe zone limits
-        self.safezone_limits = [2,2,2] # [x,y,z] in meters
+        self.safezone_limits = [np.infty,np.infty,np.infty] # [x,y,z] in meters
 
     def step(self):
         raise NotImplementedError
