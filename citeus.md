@@ -1,13 +1,14 @@
 ### Citing CrazyChoir
 
-If you are you using ChoiRbot in research work to be published, please cite the accompanying paper
+If you are using CrazyChoir in research work to be published, please cite the accompanying paper
 
 
-    @article{pichierri2023crazychoir,
-    title={CrazyChoir: Flying Swarms of Crazyflie Quadrotors in ROS 2},
-    author={Pichierri, Lorenzo and Testa, Andrea and Notarstefano, Giuseppe},
-    journal={arXiv preprint arXiv:2302.00716},
-    year={2023}
-    }
+@article{pichierri2023crazychoir,
+  title={CrazyChoir: Flying Swarms of Crazyflie Quadrotors in ROS 2},
+  author={Pichierri, Lorenzo and Testa, Andrea and Notarstefano, Giuseppe},
+  journal={IEEE Robotics and Automation Letters},
+  year={2023},
+  publisher={IEEE}
+}
 
-You can read our paper also on [ArXiv](https://arxiv.org/pdf/2302.00716.pdf).
+You can read our paper [here](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10153630).
