@@ -13,17 +13,7 @@
 ## Requirements and Installation
 **CrazyChoir** requires ROS 2 Foxy to be installed on your system.
 
-To install the toolbox, create a ROS 2 workspace and, inside the `src` directory, run:
-```
-git clone --recursive https://github.com/OPT4SMART/crazychoir.git .
-```
-
 Some preliminary steps are required to succesfully complete the installation. We refer the reader to [this guide](https://opt4smart.github.io/crazychoir/installation).
-
-After following all the steps, from the workspace parent directory execute:
-```
-colcon build --symlink-install
-```
 
 ## Examples
 In order to check the installation and start to use **CrazyChoir**, you can run
