@@ -19,7 +19,7 @@ Instead, if you are ready to fly, try this
 
     ros2 launch crazychoir_examples tracking_vicon.launch.py
 
-The pickup-and-delivery example instead is based on the [distributed resource allocation algorithm](https://arxiv.org/abs/2104.02415), that allows Crazyflies to self-assign the tasks by communicating with neighboring robots and then move toward the designated locations. If you are interested, take a look at the [accompaining paper](https://arxiv.org/abs/2104.02415).
+The pickup-and-delivery example instead is based on a distributed resource allocation algorithm, that allows Crazyflies to self-assign the tasks by communicating with neighboring robots and then move toward the designated locations. If you are interested, take a look at the [accompaining paper](https://arxiv.org/abs/2104.02415).
 
 ## Bearing-based Formation Control
 
