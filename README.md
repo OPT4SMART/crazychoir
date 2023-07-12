@@ -24,6 +24,23 @@ ros2 launch crazychoir_examples formation_webots.launch.py
 
 This will start a Webots simulation with 11 Crazyflie nano-quadrotor performing a formation control task.
 
+
+## Citing **CrazyChoir**
+If you are you using **CrazyChoir** in research work to be published, please cite the accompanying paper
+
+```
+@ARTICLE{pichierri2023crazychoir,
+  title={CrazyChoir: Flying Swarms of Crazyflie Quadrotors in ROS 2},
+  author={Pichierri, Lorenzo and Testa, Andrea and Notarstefano, Giuseppe},
+  journal={IEEE Robotics and Automation Letters},  
+  volume={8},
+  number={8},
+  pages={4713-4720},
+  year={2023},
+  publisher={IEEE}
+```
+
+
 ## Contributors
 **CrazyChoir** is developed by
 [Lorenzo Pichierri](https://www.unibo.it/sitoweb/lorenzo.pichierri),
