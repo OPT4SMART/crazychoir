@@ -24,7 +24,7 @@ ros2 launch crazychoir_examples formation_webots.launch.py
 
 This will start a Webots simulation with 4 Crazyflie nano-quadrotor performing a leader-follower formation control task. A video of the simulation is available here:
   
-<iframe width="560" height="315" src="https://youtu.be/bOM_JnBsJ48" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![Alternate Text](http://img.youtube.com/vi/bOM_JnBsJ48/0.jpg)](https://youtu.be/bOM_JnBsJ48)
 
 >**Note:** The example was executed on an Dell XPS 15 9570 equipped with an Intel i7-7700HQ CPU and a NVIDIA GeForce GTX 1050 GPU.
 
