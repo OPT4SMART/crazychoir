@@ -22,8 +22,13 @@ In order to check the installation and start to use **CrazyChoir**, you can run
 ros2 launch crazychoir_examples formation_webots.launch.py 
 ```
 
-This will start a Webots simulation with 11 Crazyflie nano-quadrotor performing a formation control task.
+This will start a Webots simulation with 4 Crazyflie nano-quadrotor performing a leader-follower formation control task. A video of the simulation is available here:
+  
+<iframe width="560" height="315" src="https://youtu.be/bOM_JnBsJ48" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+>**Note:** The example was executed on an Dell XPS 15 9570 equipped with an Intel i7-7700HQ CPU and a NVIDIA GeForce GTX 1050 GPU.
+
+You can also run more advanced examples, such as the letter formation task, or the task assignment experiment. For more information, please refer to the [examples](https://opt4smart.github.io/crazychoir/video) page.
 
 ## Citing **CrazyChoir**
 If you are you using **CrazyChoir** in research work to be published, please cite the accompanying paper

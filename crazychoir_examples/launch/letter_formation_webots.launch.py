@@ -33,29 +33,50 @@ def get_cf_driver(agent_id):
 def generate_launch_description():
 
     # number of agents
-    N = 4
+    N = 11
 
     # communication matrix
     Adj = np.array([
-        [0, 1, 0, 1],
-        [1, 0, 1, 1],
-        [0, 1, 0, 1],
-        [1, 1, 1, 0],
+        [0,	1,	1,	1,	1,	0,	0,	0,	1,	0,	0],
+        [1,	0,	1,	1,	1,	0,	0,	1,	0,	0,	0],
+        [1,	1,	0,	1,	1,	0,	0,	0,	0,	0,	0],
+        [1,	1,	1,	0,	1,	1,	1,	0,	0,	0,	1],
+        [1,	1,	1,	1,	0,	1,	0,	0,	0,	1,	1],
+        [0,	0,	0,	1,	1,	0,	1,	0,	1,	1,	1],
+        [0,	0,	0,	1,	0,	1,	0,	1,	1,	1,	1],
+        [0,	1,	0,	0,	0,	0,	1,	0,	1,	1,	1],
+        [1,	0,	0,	0,	0,	1,	1,	1,	0,	1,	0],
+        [0,	0,	0,	0,	1,	1,	1,	1,	1,	0,	1],
+        [0,	0,	0,	1,	1,	1,	1,	1,	0,	1,	0],
     ])
 
     # generate initial positions to evaluate initial takeoff
     P = np.zeros((N, 3))   
-    P[0] = np.array([-0.7, -0.7, 0.015])
-    P[1] = np.array([ 0.7, -0.7, 0.015])
-    P[2] = np.array([ 0.1,  0.1, 0.015])
-    P[3] = np.array([-0.6,  0.3, 0.015])
+    P[0]  = np.array([ 0.5508979 ,  0.87484782,  0.015])
+    P[1]  = np.array([-0.70899526, -0.65577239,  0.015])
+    P[2]  = np.array([ 0.39294695,  0.39619309,  0.015])
+    P[3]  = np.array([ 0.32558531, -0.62615712,  0.015])
+    P[4]  = np.array([ 0.0513672 , -0.72589016,  0.015])
+    P[5]  = np.array([-0.10322379, -0.94286678,  0.015])
+    P[6]  = np.array([-0.01725595, -1.22131272,  0.015])
+    P[7]  = np.array([-0.3234451 ,  0.42256282,  0.015])
+    P[8]  = np.array([-0.97551812,  0.72535409,  0.015])
+    P[9]  = np.array([-0.40714755,  0.9138012 ,  0.015])
+    P[10] = np.array([-0.04957492,  1.19173792,  0.015])
 
     # generate coordinates to evaluate desired bearings
     D = np.zeros((N, 3))
-    D[0,0:3] = np.array([-1, -1, 1.0])*0.7
-    D[1,0:3] = np.array([ 1, -1, 1.0])*0.7
-    D[2,0:3] = np.array([ 1,  1, 1.0])*0.7
-    D[3,0:3] = np.array([-1,  1, 1.0])*0.7
+    D[0]  = np.array([  0.5001,  0.6667, 0.5])
+    D[1]  = np.array([ -0.4999, -0.6666, 0.5])
+    D[2]  = np.array([ -0.0000, -0.0001, 0.5])
+    D[3]  = np.array([  0.5000, -0.3334, 0.5])
+    D[4]  = np.array([  0.4999, -0.6667, 0.5])
+    D[5]  = np.array([  0.1669, -0.9997, 0.5])
+    D[6]  = np.array([ -0.1664, -0.9998, 0.5])
+    D[7]  = np.array([ -0.4997,  0.3317, 0.5])
+    D[8]  = np.array([ -0.4995,  0.6665, 0.5])
+    D[9]  = np.array([ -0.1664,  0.9987, 0.5])
+    D[10] = np.array([  0.1669,  0.9986, 0.5])
 
     dd = np.size(D,1)
 
@@ -83,7 +104,7 @@ def generate_launch_description():
                     }]))
 
             
-    webots = WebotsLauncher(world=os.path.join(package_dir, 'worlds', 'formation_world.wbt'))
+    webots = WebotsLauncher(world=os.path.join(package_dir, 'worlds', 'letter_formation_world.wbt'))
 
     launch_description.append(webots)
 
