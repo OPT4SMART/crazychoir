@@ -51,3 +51,10 @@ If you are you using **CrazyChoir** in research work to be published, please cit
 [Lorenzo Pichierri](https://www.unibo.it/sitoweb/lorenzo.pichierri),
 [Andrea Testa](https://www.unibo.it/sitoweb/a.testa) and
 [Giuseppe Notarstefano](https://www.unibo.it/sitoweb/giuseppe.notarstefano)
+
+## Acknowledgements
+This work was supported in part by the Italian Ministry of Foreign Affairs and International Cooperation, grant number BR22GR01.
+
+<p style="text-align:center">
+  <img src="maeci_logo.png" width="200" />
+</p>
