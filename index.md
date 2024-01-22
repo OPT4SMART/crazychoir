@@ -16,7 +16,7 @@ If you like <b>CrazyChoir</b> support us on GitHub!
 This work was supported in part by the Italian Ministry of Foreign Affairs and International Cooperation, grant number BR22GR01.
 
 <p style="text-align:center">
-  <img src="assets/maeci_logo.jpg" width="200" />
+  <img src="assets/css/maeci_logo.jpg" width="200" />
 </p>
 
 <!-- Place this tag in your head or just before your close body tag. -->
