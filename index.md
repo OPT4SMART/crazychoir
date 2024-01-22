@@ -12,6 +12,12 @@ If you like <b>CrazyChoir</b> support us on GitHub!
 <a class="github-button" href="https://github.com/OPT4SMART/crazychoir" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star OPT4SMART/crazychoir on GitHub">Star</a>
 </p>
 
+## Acknowledgements
+This work was supported in part by the Italian Ministry of Foreign Affairs and International Cooperation, grant number BR22GR01.
+
+<p style="text-align:center">
+  <img src="assets/maeci_logo.jpg" width="200" />
+</p>
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
