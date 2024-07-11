@@ -8,12 +8,14 @@
 | Documentation pages are currently being uploaded. The latest version will be available soon. |
 
 **CrazyChoir** is a ROS 2 toolbox allowing users to run simulations and experiments on swarms of Crazyflie nano-quadrotors.
-**CrazyChoiR** implements several tools to model swarms of Crazyflie nano-quadrotors and to run distributed, complex tasks both in simulation and experiments. Examples include task assignment, formation control and trajectory tracking settings.
+**CrazyChoir** implements several tools to model swarms of Crazyflie nano-quadrotors and to run distributed, complex tasks both in simulation and experiments. Examples include task assignment, formation control, and trajectory tracking settings.
 
 ## Requirements and Installation
 **CrazyChoir** requires ROS 2 Foxy to be installed on your system.
 
-Some preliminary steps are required to succesfully complete the installation. We refer the reader to [this guide](https://opt4smart.github.io/crazychoir/installation).
+Some preliminary steps are required to complete the installation. We refer the reader to [this guide](https://opt4smart.github.io/crazychoir/installation).
+
+>🚨 **NEWS** 🚨: Docker installer is now available! 
 
 ## Examples
 In order to check the installation and start to use **CrazyChoir**, you can run
@@ -26,12 +28,12 @@ This will start a Webots simulation with 4 Crazyflie nano-quadrotor performing a
   
 [![Alternate Text](http://img.youtube.com/vi/bOM_JnBsJ48/0.jpg)](https://youtu.be/bOM_JnBsJ48)
 
->**Note:** The example was executed on an Dell XPS 15 9570 equipped with an Intel i7-7700HQ CPU and a NVIDIA GeForce GTX 1050 GPU.
+>**Note:** The example was executed on a Dell XPS 15 9570 equipped with an Intel i7-7700HQ CPU and an NVIDIA GeForce GTX 1050 GPU.
 
 You can also run more advanced examples, such as the letter formation task, or the task assignment experiment. For more information, please refer to the [examples](https://opt4smart.github.io/crazychoir/video) page.
 
 ## Citing **CrazyChoir**
-If you are you using **CrazyChoir** in research work to be published, please cite the accompanying paper
+If you are using **CrazyChoir** in research work to be published, please cite the accompanying paper
 
 ```
 @ARTICLE{pichierri2023crazychoir,
