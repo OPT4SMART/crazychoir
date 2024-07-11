@@ -1,4 +1,4 @@
-# Dockerizing the CrazyChoir Repository
+# Docker Installation of **CrazyChoir** 🐋
 
 This README provides instructions on how to dockerize the CrazyChoir repository by building a Docker image and creating a Docker container.
 
