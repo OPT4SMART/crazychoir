@@ -11,7 +11,7 @@ cd ~/crazychoir_ws/src
 git clone --recursive https://github.com/OPT4SMART/crazychoir.git .
 git submodule update --remote --merge ChoiRbot/
 ```
-Now, follow the instructions written in the [`README_docker.md`](https://github.com/OPT4SMART/crazychoir/blob/master/docker/README_docker.md) file.
+Now, follow the instructions written [here](https://github.com/OPT4SMART/crazychoir/blob/master/docker).
 
 Otherwise, if you want to proceed with the classical installation, please refer to the next chapter.
 
