@@ -15,7 +15,7 @@
 
 Some preliminary steps are required to complete the installation. We refer the reader to [this guide](https://opt4smart.github.io/crazychoir/installation).
 
->🚨 **NEWS** 🚨: Docker installer is now available! 
+>🚨 **NEWS** 🚨: Docker installer is now available [here](https://github.com/OPT4SMART/crazychoir/tree/master/docker)! 
 
 ## Examples
 In order to check the installation and start to use **CrazyChoir**, you can run
