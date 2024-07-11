@@ -1,5 +1,19 @@
 # Installation
-In this page, we provide the installation procedure for the **CrazyChoir** package
+On this page, we provide the installation procedure for the **CrazyChoir** package
+
+## Docker Installation 🐋
+If you want to install **CrazyChoir** using our docker image, follow the following commands.
+First, open a terminal and clone the repo in `~/crazychoir_ws/src`:
+
+```bash
+mkdir -p ~/crazychoir_ws/src
+cd ~/crazychoir_ws/src
+git clone --recursive https://github.com/OPT4SMART/crazychoir.git .
+git submodule update --remote --merge ChoiRbot/
+```
+Now, follow the instructions written in the [`README_docker.md`](https://github.com/OPT4SMART/crazychoir/blob/master/docker/README_docker.md) file.
+
+Otherwise, if you want to proceed with the classical installation, please refer to the next chapter.
 
 ## Requirements and Installation
 
@@ -12,7 +26,7 @@ which provides useful tools such as RVIZ.
 
 The following packages are also required to run Webots simulations:
 
-```
+```bash
 sudo apt install ros-foxy-vision-msgs
 sudo apt install ros-foxy-hardware-interface
 sudo apt install ros-foxy-controller-manager
@@ -20,39 +34,42 @@ sudo apt install ros-foxy-controller-manager
 
 If you do not have a ROS 2 workspace run on a terminal:
 
-	mkdir -p ~/dev_ws/src
-	cd ~/dev_ws/src
+```bash
+mkdir -p ~/crazychoir_ws/src
+cd ~/crazychoir_ws/src
+```
 
 To install the toolbox, navigate inside the `src` directory and run:
-```
+
+```bash
 git clone --recursive https://github.com/OPT4SMART/crazychoir.git .
 git submodule update --remote --merge ChoiRbot/
 ```
 
 Then, install the Vicon required libraries
 
-```
+```bash
 cd ros2-vicon-receiver
 ./install_libs.sh
 ```
 
 Then, simply build the workspace:
-```
-cd ~/dev_ws
+```bash
+cd ~/crazychoir_ws
 colcon build --symlink-install
 ```
 
 ### Installation of required Python packages
 
 **CrazyChoir** requires a set of Python packages that can be installed by running:
-```  
-cd ~/dev_ws/src/
+```  bash
+cd ~/crazychoir_ws/src/
 pip3 install -r requirements.txt
 ```
 
 **CrazyChoir** requires a set of API from the [DISROPT package](https://github.com/OPT4SMART/disropt).
 You can install them by running:
-```
+```bash
 pip3 install --no-deps disropt
 ```
 You could also install disropt by directly running ``pip install disropt``. However,
@@ -63,13 +80,13 @@ not required by **CrazyChoir**.
 In order to use some functionalities of the package, it is necessary to build the Crazyflie firmware and create Python bindings of firmware functions.
 We follow the guide at [this link](https://github.com/bitcraze/crazyflie-firmware/blob/master/docs/building-and-flashing/build.md).
 
-In your favourite directory, run
-```
+In your favorite directory, run
+```bash
 sudo apt-get install make gcc-arm-none-eabi
 sudo apt install swig
 ```
 Then, clone the Crazyflie firmware repository
-```
+```bash
 git clone --recursive https://github.com/bitcraze/crazyflie-firmware.git
 cd crazyflie-firmware
 git submodule init
@@ -77,7 +94,7 @@ git submodule update
 ```
 
 Compile and create the bindings
-```
+```bash
 make cf2_defconfig
 make -j 12
 make bindings_python
