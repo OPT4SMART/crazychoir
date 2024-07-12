@@ -93,4 +93,4 @@ class MotorCtrlFPQR(MotorCtrl):
         # NOTE: minus @ pitch
         self.setpoint.attitudeRate.pitch = degrees(-self.target_cmd_vel.angular.y)    # deg/s
         self.setpoint.attitudeRate.yaw   = degrees(self.target_cmd_vel.angular.z)    # deg/s
-        self.setpoint.thrust             = np.clip(thrust_min, self.target_cmd_vel.linear.z*newton2pwm, thrust_max)   # PWM units
+        self.setpoint.thrust             = np.clip(self.target_cmd_vel.linear.z*newton2pwm, thrust_min, thrust_max)   # PWM units
