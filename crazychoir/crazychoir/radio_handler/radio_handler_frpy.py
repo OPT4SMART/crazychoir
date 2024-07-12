@@ -18,8 +18,8 @@ class RadioHandlerFRPY(RadioHandler):
         # cmd limits
         self.thrust_lim_max = 60000
         self.thrust_lim_min = 10001
-        self.pq_lim = 720
-        self.r_lim  = 450
+        self.rp_lim = 720
+        self.y_lim  = 450
 
         # takeoff permission
         self.takeoff = False
@@ -33,10 +33,10 @@ class RadioHandlerFRPY(RadioHandler):
         self.check_safety_area()
 
 
-        cmd_thrust  = np.clip(self.thrust_lim_min, int(msg.linear.z*self.newton2pwm),self.thrust_lim_max) # uint
-        cmd_roll    = np.clip(-self.pq_lim,        degrees( msg.angular.x), self.pq_lim) #deg/s
-        cmd_pitch   = np.clip(-self.pq_lim,        degrees( msg.angular.y), self.pq_lim) #no minus
-        cmd_yaw     = np.clip( -self.r_lim,        degrees(-msg.angular.z),  self.r_lim)
+        cmd_thrust  = np.clip(int(msg.linear.z*self.newton2pwm), self.thrust_lim_min, self.thrust_lim_max) # uint
+        cmd_roll    = np.clip(degrees( msg.angular.x)          , -self.rp_lim, self.rp_lim) #deg/s
+        cmd_pitch   = np.clip(degrees( msg.angular.y)          , -self.rp_lim, self.rp_lim) #no minus
+        cmd_yaw     = np.clip(degrees(-msg.angular.z)          , -self.y_lim , self.y_lim)
 
         if self.emergency_stop or not self.takeoff:
             cmd_thrust  = 0
