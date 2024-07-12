@@ -32,10 +32,10 @@ class RadioHandlerFPQR(RadioHandler):
         # Check safety area
         self.check_safety_area()
 
-        cmd_thrust  = np.clip(self.thrust_lim_min, int(msg.linear.z*self.newton2pwm),self.thrust_lim_max) # uint
-        cmd_roll    = np.clip(-self.pq_lim,        degrees( msg.angular.x), self.pq_lim) #deg/s
-        cmd_pitch   = np.clip(-self.pq_lim,        degrees( msg.angular.y), self.pq_lim) #no minus
-        cmd_yaw     = np.clip( -self.r_lim,        degrees(-msg.angular.z),  self.r_lim)
+        cmd_thrust  = np.clip(int(msg.linear.z*self.newton2pwm),self.thrust_lim_min, self.thrust_lim_max) # uint
+        cmd_roll    = np.clip(degrees( msg.angular.x)          ,-self.pq_lim, self.pq_lim) #deg/s
+        cmd_pitch   = np.clip(degrees( msg.angular.y)          ,-self.pq_lim, self.pq_lim) #no minus
+        cmd_yaw     = np.clip(degrees(-msg.angular.z)          ,-self.r_lim, self.r_lim)
 
         if self.emergency_stop or not self.takeoff:
             cmd_thrust  = 0
