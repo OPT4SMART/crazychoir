@@ -11,7 +11,7 @@ from trajectory_msgs.msg import JointTrajectory as Trajectory, JointTrajectoryPo
 
 class SimpleGuidance(Node):
 
-    def __init__(self, pose_handler: str=None, pose_topic: str=None, pose_callback: Callable=None):
+    def __init__(self, pose_handler: str=None, pose_topic: str=None, pose_callback: Callable=None, takeoff_time: float=5.0, height: float=1.0):
 
         super().__init__('simple_guidance', allow_undeclared_parameters=True,
             automatically_declare_parameters_from_overrides=True)
@@ -31,10 +31,11 @@ class SimpleGuidance(Node):
         # subscription to trajectory topic
         self.publishers_traj_params = self.create_publisher(Trajectory, 'traj_params', 1)
 
-        # Set default height
-        self.height = 1.0
+        # Set default height and takeoff time
+        self.height = height
+        self.takeoff_time = takeoff_time
 
-        self.get_logger().info('Guidance {} started'.format(self.agent_id))
+        self.get_logger().info('Simple Guidance {} started'.format(self.agent_id))
 
 
     def takeoff(self, _):
@@ -47,7 +48,7 @@ class SimpleGuidance(Node):
         x = self.init_pos[0]
         y = self.init_pos[1]
         z = self.height
-        duration_s = 5
+        duration_s = self.takeoff_time
         point.positions = [x,y,z]
         point.velocities = [0.0,0.0,0.0]
         point.accelerations = [0.0,0.0,0.0]
@@ -70,7 +71,7 @@ class SimpleGuidance(Node):
         x = self.current_pose.position[0]
         y = self.current_pose.position[1]
         z = 0.01
-        duration_s = 5
+        duration_s = self.takeoff_time
         point.positions = [x,y,z]
         point.velocities = [0.0,0.0,0.0]
         point.accelerations = [0.0,0.0,0.0]
