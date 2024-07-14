@@ -7,6 +7,11 @@
 |:------------------------------------|
 | Documentation pages are currently being uploaded. The latest version will be available soon. |
 
+|🚨 **NEWS** 🚨|
+|:-------------|
+|**DOCKER** installer is now available [here](https://github.com/OPT4SMART/crazychoir/tree/master/docker)! |
+
+
 **CrazyChoir** is a ROS 2 toolbox allowing users to run simulations and experiments on swarms of Crazyflie nano-quadrotors.
 **CrazyChoir** implements several tools to model swarms of Crazyflie nano-quadrotors and to run distributed, complex tasks both in simulation and experiments. Examples include task assignment, formation control, and trajectory tracking settings.
 
@@ -14,10 +19,6 @@
 **CrazyChoir** requires ROS 2 Foxy to be installed on your system.
 
 Some preliminary steps are required to complete the installation. We refer the reader to [this guide](https://opt4smart.github.io/crazychoir/installation).
-
-|🚨 **NEWS** 🚨|
-|:-------------|
-|Docker installer is now available [here](https://github.com/OPT4SMART/crazychoir/tree/master/docker)! |
 
 ## Examples
 To check the installation and start to use **CrazyChoir**, you can run
