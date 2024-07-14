@@ -83,7 +83,7 @@ COPY ./requirements.txt /home/${DEV_NAME}/${WS_NAME}/
 # Clone Crazyflie firmware
 USER root
 WORKDIR /home/${DEV_NAME}/
-RUN git clone --recursive https://github.com/bitcraze/crazyflie-firmware.git
+RUN git clone --recursive https://github.com/bitcraze/crazyflie-firmware.git --branch 2023.02
 WORKDIR /home/${DEV_NAME}/crazyflie-firmware/
 RUN git submodule init
 RUN git submodule update
