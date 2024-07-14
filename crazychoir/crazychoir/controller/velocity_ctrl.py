@@ -44,7 +44,7 @@ class VelocityController(CrazyflieController):
 
         self.ctrl_timer = self.create_timer(1.0/self.velocity_strategy.update_frequency, self.controller)
 
-        self.reference_lost = True
+        self.set_steady_reference = True
         self.desired_reference = {}
 
         self.desired_reference["position"] = None
@@ -56,11 +56,11 @@ class VelocityController(CrazyflieController):
         if self.current_pose.position is not None and self.current_pose.velocity is not None:
             if self.traj_handler is not None and bool(self.traj_handler.get_desired_reference()): # #NOTE and (there is a desired reference)
                 self.desired_reference = self.traj_handler.get_desired_reference()
-                self.reference_lost = True 
+                self.set_steady_reference = True 
             else:
-                if self.reference_lost and self.desired_reference["position"] is not None:
+                if self.set_steady_reference and self.desired_reference["position"] is not None:
                     self.get_logger().warn('Reference lost - keeping hovering')
-                    self.reference_lost = False
+                    self.set_steady_reference = False
                     self.desired_reference["position"] = self.current_pose.position
                     self.desired_reference["velocity"] = np.zeros(3)
 

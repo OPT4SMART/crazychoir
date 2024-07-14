@@ -70,7 +70,7 @@ class HierarchicalController(CrazyflieController):
         self.desired_attitude = R.from_euler('xyz', np.zeros(3))
         self.pqr = np.zeros(3)
 
-        self.reference_lost = True
+        self.set_steady_reference = True
         self.desired_reference = {}
 
         self.desired_reference["position"] = np.zeros(3)
@@ -86,10 +86,10 @@ class HierarchicalController(CrazyflieController):
         if self.current_pose.position is not None and self.current_pose.velocity is not None:
             if self.traj_handler is not None and bool(self.traj_handler.get_desired_reference()): # #NOTE and (there is a desired reference)
                 self.desired_reference = self.traj_handler.get_desired_reference()
-                self.reference_lost = True
+                self.set_steady_reference = True
             else:
-                if self.reference_lost:
-                    self.reference_lost = False
+                if self.set_steady_reference:
+                    self.set_steady_reference = False
                     self.desired_reference["position"] = np.copy(self.current_pose.position)
                     self.desired_reference["velocity"] = np.zeros(3)
                     self.desired_reference["acceleration"] = np.zeros(3)
