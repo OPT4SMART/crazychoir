@@ -5,6 +5,7 @@ recordclass>=0.14.3
 autograd>=1.3
 cvxopt>=1.2.3
 cvxpy>=1.0.25
+networkx
 osqp>=0.6.1
 black
 pre-commit

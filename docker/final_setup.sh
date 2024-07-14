@@ -17,5 +17,3 @@ rm -rf /home/${DEV_NAME}/${WS_NAME}/src/webots_ros2/webots_ros2_core \
            /home/${DEV_NAME}/${WS_NAME}/src/webots_ros2/webots_ros2_tiago \
            /home/${DEV_NAME}/${WS_NAME}/src/webots_ros2/webots_ros2_turtlebot \
            /home/${DEV_NAME}/${WS_NAME}/src/webots_ros2/webots_ros2_universal_robot
-
-sed -i "s@/PATH/TO/crazyflie-firmware@/home/opt4smart/crazyflie-firmware/build@g" /home/${DEV_NAME}/${WS_NAME}/src/crazychoir/crazychoir/utils/__init__.py
