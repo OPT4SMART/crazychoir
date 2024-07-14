@@ -7,6 +7,7 @@ scripts = {
     'formation_rviz': ['controller','guidance','integrator','rviz'],
     'formation_vicon': ['controller','gui','guidance','radio','trajectory'],
     'formation_webots': ['controller_leaders','controller_followers','gui','guidance','trajectory'],
+    'goto_webots': ['controller','guidance','gui','trajectory'],
     'task_assignment_webots': ['guidance','simple_guidance', 'gui','planner','table'],
     'task_assignment_vicon': ['guidance','simple_guidance', 'gui','planner','table','radio'],
     'tracking_vicon': ['controller','guidance','gui','radio','trajectory'],
