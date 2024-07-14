@@ -18,7 +18,7 @@ Some preliminary steps are required to complete the installation. We refer the r
 >🚨 **NEWS** 🚨: Docker installer is now available [here](https://github.com/OPT4SMART/crazychoir/tree/master/docker)! 
 
 ## Examples
-In order to check the installation and start to use **CrazyChoir**, you can run
+To check the installation and start to use **CrazyChoir**, you can run
 
 ```
 ros2 launch crazychoir_examples formation_webots.launch.py 
