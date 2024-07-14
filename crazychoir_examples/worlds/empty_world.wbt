@@ -36,7 +36,7 @@ Floor {
       filtering 0
     }
     textureTransform TextureTransform {
-      center 1.9 1.9
+      center 0.0 0.0
       scale 0.2 0.2
     }
   }
