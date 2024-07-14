@@ -87,7 +87,7 @@ def generate_launch_description():
                 executable='crazychoir_goto_webots_gui',
                 output='screen',
                 parameters=[{
-                    'n_agents': 1,
+                    'n_agents': N,
                     }]))
             
 
