@@ -1,49 +1,9 @@
-#VRML_SIM R2022a utf8
-WorldInfo {
-  basicTimeStep 9.5
-}
-Viewpoint {
-  fieldOfView 0.8
-  orientation -0.4 0.4 0.8 1.75285
-  position 0 -3.2 5.3
-}
-TexturedBackground {
-}
-TexturedBackgroundLight {
-  luminosity 0
-  castShadows    FALSE
-}
-DirectionalLight {
-  direction 1 1 -1
-  color 0.83 0.83 0.75
-  ambientIntensity 1
-}
-Floor {
-  translation 0 0 0
-  rotation 0 1 0 0
-  size 10 10
-  appearance Appearance {
-    material Material {
-      ambientIntensity 0
-      shininess 0
-    }
-    texture ImageTexture {
-      url [
-        "../../../../../src/crazychoir/crazychoir/utils/images/casy_logo.png"
-      ]
-      repeatS FALSE
-      repeatT FALSE
-      filtering 0
-    }
-    textureTransform TextureTransform {
-      center 1.9 1.9
-      scale 0.2 0.2
-    }
-  }
-}
+
 Robot {
-  translation 0.0 0.0 0.015
-  children [
+  name "$NAME"
+  translation $X $Y $Z
+  controller "<extern>"
+    children [
     Solid {
       translation 0 0 -0.015
       children [
@@ -226,7 +186,6 @@ Robot {
       }
     }
   ]
-  name "agent_0"
   boundingObject Cylinder {
     height 0.03
     radius 0.05
@@ -235,5 +194,4 @@ Robot {
     density -1
     mass 0.038
   }
-  controller "<extern>"
 }
