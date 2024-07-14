@@ -51,7 +51,7 @@ class MotorCtrl:
         
         ## Intialize Variables
         self.current_pose = Pose(None, None, None, None)
-        self.past_position = np.zeros(3)
+        self.past_position = None
         self.past_time = self.robot.getTime()
 
         # Initialize cf classes
@@ -98,6 +98,8 @@ class MotorCtrl:
 
         # TODO use velocity_low_pass
         dt = self.robot.getTime() - self.past_time
+        if self.past_position is None:
+            self.past_position = np.copy(self.current_pose.position)
         self.current_pose.velocity = (self.current_pose.position - self.past_position)/dt
 
     def publish_odometry(self):

@@ -3,6 +3,7 @@ from .trajectory_handler import FullStateTrajHandler
 from scipy.spatial.transform import Rotation as R
 from numpy.polynomial import Polynomial as poly
 from typing import Callable
+from time import sleep
 
 
 class Spline(FullStateTrajHandler):
@@ -18,6 +19,7 @@ class Spline(FullStateTrajHandler):
         # get_parameter_or return None if not declared
         traj_params = self.get_parameter_or('traj_params').value
 
+        self.velocity_old = None
 
         if traj_params is not None:
         
@@ -43,6 +45,15 @@ class Spline(FullStateTrajHandler):
 
         self.trajectory_coeff = np.zeros((8,3))
 
+    def approximate_acceleration(self, dt, velocity):
+        
+        if self.velocity_old is not None:
+            return (velocity - self.velocity_old)/dt 
+                    
+        else:
+            return np.zeros(3)
+
+
     def traj_params_callback(self, msg):
         traj_params = msg.points
         self.traj_params = {}
@@ -52,14 +63,22 @@ class Spline(FullStateTrajHandler):
         self.traj_params['acceleration']  = []
         self.traj_params['jerk']          = []
 
+        while self.current_pose.position is None:
+            self.get_logger().warn(f'[Agent {self.agent_id}] Waiting 5s for pose. Actual pose: {self.current_pose}')
+            sleep(5)
+
         if len(traj_params) < 2:
             # Goto point scenario -> extend the reference parameters with initial and intermediate point
+
+            # Approximate the initial acceleration
+            current_acceleration = self.approximate_acceleration(0.01, self.current_pose.velocity)
+            self.velocity_old = np.copy(self.current_pose.velocity)
 
             # Initial point
             self.traj_params['time'].insert(0,0.0)
             self.traj_params['position'].insert(0,list(self.current_pose.position))
             self.traj_params['velocity'].insert(0,list(self.current_pose.velocity))
-            self.traj_params['acceleration'].insert(0,[0,0,0])
+            self.traj_params['acceleration'].insert(0,list(current_acceleration))
             self.traj_params['jerk'].insert(0,[0,0,0])
 
             # Final Point
@@ -227,3 +246,23 @@ def compute_spline_coefficients(T,q,a,v):
         a[k,3] = (w[k+1]-w[k])/6/T[k]
         
     return a
+
+
+# TODO the stratesy pattern is not implemented in the trajectory_handler
+from geometry_msgs.msg import Vector3
+class SplinePosition(Spline):
+    
+    def __init__(self, update_frequency: float, pose_handler: str=None, pose_topic: str=None, pose_callback: Callable = None, input_topic = 'position'):
+        super().__init__(update_frequency, pose_handler, pose_topic, pose_callback, input_topic)
+
+        self.destroy_publisher(self.publisher_) 
+        self.publisher_ = self.create_publisher(Vector3, input_topic, 1)
+
+    def send_reference(self, ref):
+        msg = Vector3()
+
+        msg.x     = ref[0]
+        msg.y     = ref[1]
+        msg.z     = ref[2]
+
+        self.publisher_.publish(msg)

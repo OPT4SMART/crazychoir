@@ -1,6 +1,6 @@
 # Change this path to your crazyflie-firmware folder
 import sys
-sys.path.append('/PATH/TO/crazyflie-firmware')
+sys.path.append('/home/opt4smart/crazyflie-firmware/build')
 
 try:
     import cffirmware
