@@ -10,18 +10,17 @@ from webots_ros2_driver.webots_launcher import WebotsLauncher
 
 node_frequency = 100 # [Hz]
 
-package_dir = get_package_share_directory('crazychoir_examples')
 
-def get_cf_driver(agent_id):
-    robot_description = pathlib.Path(os.path.join(package_dir, 'crazyflie_fpqr.urdf')).read_text()
-
+def get_webots_driver_cf(agent_id):
+    package_dir_driver = get_package_share_directory('crazychoir_examples')
+    robot_description = pathlib.Path(os.path.join(package_dir_driver, 'crazyflie_fpqr.urdf')).read_text()
     crazyflie_driver = Node(
         package='webots_ros2_driver',
         executable='driver',
-        namespace='agent_{}'.format(agent_id),
+        namespace=f'agent_{agent_id}',
         output='screen',
         additional_env={
-            'WEBOTS_ROBOT_NAME':'agent_{}'.format(agent_id),
+            'WEBOTS_ROBOT_NAME':f'agent_{agent_id}',
             },
         parameters=[
             {'robot_description': robot_description},
@@ -29,6 +28,23 @@ def get_cf_driver(agent_id):
     )
 
     return crazyflie_driver
+
+def generate_webots_world_file(robots, source_filename, target_filename):
+    with open(source_filename, 'r') as source_file:
+        contents = source_file.read()
+
+    with open(target_filename, 'w') as target_file:
+        target_file.write(contents)
+
+        for robot in robots:
+            template_filename = os.path.join(os.path.dirname(source_filename), f'obj_{robot["type"]}.wbt')
+            with open(template_filename, 'r') as template_file:
+                template = template_file.read()
+                template = template.replace('$NAME', robot["name"])
+                template = template.replace('$X', str(robot["position"][0]))
+                template = template.replace('$Y', str(robot["position"][1]))
+                template = template.replace('$Z', str(robot["position"][2]))
+                target_file.write(template)
 
 def generate_launch_description():
 
@@ -52,17 +68,17 @@ def generate_launch_description():
 
     # generate initial positions to evaluate initial takeoff
     P = np.zeros((N, 3))   
-    P[0]  = np.array([ 0.5508979 ,  0.87484782,  0.015])
-    P[1]  = np.array([-0.70899526, -0.65577239,  0.015])
-    P[2]  = np.array([ 0.39294695,  0.39619309,  0.015])
-    P[3]  = np.array([ 0.32558531, -0.62615712,  0.015])
-    P[4]  = np.array([ 0.0513672 , -0.72589016,  0.015])
-    P[5]  = np.array([-0.10322379, -0.94286678,  0.015])
-    P[6]  = np.array([-0.01725595, -1.22131272,  0.015])
-    P[7]  = np.array([-0.3234451 ,  0.42256282,  0.015])
-    P[8]  = np.array([-0.97551812,  0.72535409,  0.015])
-    P[9]  = np.array([-0.40714755,  0.9138012 ,  0.015])
-    P[10] = np.array([-0.04957492,  1.19173792,  0.015])
+    P[0]  = np.array([ 0.550,  0.874,  0.015])
+    P[1]  = np.array([-0.708, -0.655,  0.015])
+    P[2]  = np.array([ 0.392,  0.396,  0.015])
+    P[3]  = np.array([ 0.325, -0.626,  0.015])
+    P[4]  = np.array([ 0.051, -0.725,  0.015])
+    P[5]  = np.array([-0.103, -0.942,  0.015])
+    P[6]  = np.array([-0.017, -1.221,  0.015])
+    P[7]  = np.array([-0.323,  0.422,  0.015])
+    P[8]  = np.array([-0.975,  0.725,  0.015])
+    P[9]  = np.array([-0.407,  0.913,  0.015])
+    P[10] = np.array([-0.049,  1.191,  0.015])
 
     # generate coordinates to evaluate desired bearings
     D = np.zeros((N, 3))
@@ -94,6 +110,25 @@ def generate_launch_description():
     # initialize launch description
     launch_description = []
 
+    # Generate Webots world
+    robots = [{
+                'name': f'agent_{i}',
+                'type': 'crazyflie_red', 
+                'position': P[i, :].tolist(),
+            } for i in range(2)]
+    robots += [{
+                'name': f'agent_{i}',
+                'type': 'crazyflie', 
+                'position': P[i, :].tolist(),
+            } for i in range(2,N)]
+    
+    world_package_dir = get_package_share_directory('crazychoir_examples')
+    source_filename = os.path.join(world_package_dir, 'worlds', 'empty_world.wbt')
+    target_filename = os.path.join(world_package_dir, 'worlds', 'my_world.wbt')
+    generate_webots_world_file(robots, source_filename, target_filename)            
+    webots = WebotsLauncher(world=target_filename)
+    launch_description.append(webots)
+
     # Launch control Panel
     launch_description.append(Node(
                 package='crazychoir_examples', 
@@ -104,10 +139,6 @@ def generate_launch_description():
                     }]))
 
             
-    webots = WebotsLauncher(world=os.path.join(package_dir, 'worlds', 'letter_formation_world.wbt'))
-
-    launch_description.append(webots)
-
     # add executables for each robot
     for i in range(N):
 
@@ -118,7 +149,7 @@ def generate_launch_description():
         orth_proj_array = orth_proj[i*dd:(i+1)*dd,:].flatten().tolist()
 
         # webots exec
-        launch_description.append(get_cf_driver(i))
+        launch_description.append(get_webots_driver_cf(i))
         launch_description.append(Node(
             package='robot_state_publisher',
             executable='robot_state_publisher',
