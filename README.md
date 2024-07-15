@@ -18,7 +18,7 @@
 ## Requirements and Installation
 **CrazyChoir** requires ROS 2 Foxy to be installed on your system.
 
-Some preliminary steps are required to complete the installation. We refer the reader to [this guide](https://opt4smart.github.io/crazychoir/installation).
+Some preliminary steps are required to complete the installation. We refer the reader to the [installation guide](https://opt4smart.github.io/crazychoir/installation).
 
 ## Examples
 To check the installation and start to use **CrazyChoir**, you can run
