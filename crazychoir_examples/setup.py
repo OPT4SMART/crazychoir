@@ -4,6 +4,7 @@ from glob import glob
 
 package_name = 'crazychoir_examples'
 scripts = {
+    'collision_webots': ['collision','controller','controller_vel','closest_robot_getter','gui','guidance','trajectory','trajectory_vel'],
     'formation_rviz': ['controller','guidance','integrator','rviz'],
     'formation_vicon': ['controller','gui','guidance','radio','trajectory'],
     'formation_webots': ['controller_leaders','controller_followers','gui','guidance','trajectory'],
@@ -12,6 +13,8 @@ scripts = {
     'task_assignment_vicon': ['guidance','simple_guidance', 'gui','planner','table','radio'],
     'tracking_vicon': ['controller','guidance','gui','radio','trajectory'],
     'tracking_webots': ['controller','guidance','gui','trajectory'],
+    'aggregative_lighthouse': ['controller','gui','guidance_aggregative','guidance_aggregative_moving','guidance_intruder', 'simple_guidance','trajectory','radio'],
+    'aggregative_webots':     ['controller','gui','guidance_aggregative','guidance_aggregative_moving','guidance_intruder', 'simple_guidance','trajectory'],
     }
 setup(
     name=package_name,

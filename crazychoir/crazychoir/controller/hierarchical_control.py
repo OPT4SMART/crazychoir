@@ -116,3 +116,46 @@ class HierarchicalController(CrazyflieController):
         self.publisher_.publish(msg)
 
 
+from std_msgs.msg import ByteMultiArray
+import dill
+
+class SafeHierarchicalController(HierarchicalController):
+    def __init__(self, pose_handler: str = None, pose_topic: str = None, pose_callback: Callable = None, 
+                 position_strategy: PositionCtrlStrategy = None, attitude_strategy: AttitudeCtrlStrategy = None, 
+                 command_sender: SenderStrategy = None, traj_handler: TrajHandlerStrategy = None):
+        super().__init__(pose_handler, pose_topic, pose_callback, position_strategy, attitude_strategy, command_sender, traj_handler)
+
+        # subscribe to closest robots location
+        self.closest_robots_poses = []
+        self.closest_robots_subscription = self.create_subscription(ByteMultiArray, 'closest_robots', self.closest_robots_callback, 10)
+
+    def closest_robots_callback(self, msg):
+        # build up full byte string
+        data = bytes(map(lambda x: x[0], msg.data))
+
+        # decode message
+        received_closest_robots_data = dill.loads(data)
+
+        # get closest robots poses from received data
+        self.closest_robots_poses = received_closest_robots_data.values()
+
+
+    def get_obstacles(self):
+        obstacles = [pose.position[:2].tolist() + pose.velocity[:2].tolist() for pose in self.closest_robots_poses]
+        return obstacles
+    
+
+    def position_controller(self):
+        if self.current_pose.position is not None and self.current_pose.velocity is not None:
+            if self.traj_handler is not None and bool(self.traj_handler.get_desired_reference()): # #NOTE and (there is a desired reference)
+                self.desired_reference = self.traj_handler.get_desired_reference()
+                self.set_steady_reference = True
+            else:
+                if self.set_steady_reference:
+                    self.set_steady_reference = False
+                    self.desired_reference["position"] = np.copy(self.current_pose.position)
+                    self.desired_reference["velocity"] = np.zeros(3)
+                    self.desired_reference["acceleration"] = np.zeros(3)
+                    self.desired_reference["yaw"] = 0.0
+
+            self.thrust, self.desired_attitude = self.position_strategy.control(self.current_pose, self.desired_reference, self.get_obstacles())
