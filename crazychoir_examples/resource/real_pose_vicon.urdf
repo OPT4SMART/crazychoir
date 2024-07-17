@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<robot name="Real_Intruder">
+    <webots>
+        <plugin type="crazychoir.webots_plugin.RealPoseCtrlVicon" />
+    </webots>
+</robot>

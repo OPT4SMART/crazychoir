@@ -1,0 +1,23 @@
+Robot {
+  name "$NAME"
+  translation $X $Y $Z
+  controller "<extern>"
+  supervisor TRUE
+  children [
+    GPS {
+    }
+    Solid {
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 1 0
+            metalness 0
+          }
+          geometry Sphere {
+            radius 0.08
+          }
+        }
+      ]
+    }
+  ]
+}
