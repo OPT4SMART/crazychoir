@@ -34,8 +34,6 @@ class GoToGuidance(Node):
         self.subscription = pose_subscribe(pose_handler, pose_topic, self, self.current_pose, pose_callback)
 
         # button subscription
-        self.takeoff_trigger_subscription = self.create_subscription(Empty, '/takeoff', self.takeoff, 10)
-        self.land_trigger_subscription = self.create_subscription(Empty, '/land', self.landing, 10)
         self.experiment_trigger_subscription = self.create_subscription(Empty, '/experiment_trigger', self.execute_goal_list, 10)
 
         # subscription to trajectory topic
@@ -52,20 +50,6 @@ class GoToGuidance(Node):
             self.goto(goal_time, goal_pos)
             print(f'agent {self.agent_id} going to {goal_pos}. Wait {goal[0]}')
             sleep(goal_time)
-
-    def takeoff(self, _):
-        self.get_logger().info('Starting takeoff')
-
-        goal_pos = self.init_pos
-        goal_time = self.takeoff_time
-        self.goto(goal_time, goal_pos)
-
-    def landing(self, _):
-        self.get_logger().info('Starting landing')
-
-        goal_pos = [self.current_pose.position[0], self.current_pose.position[1], 0.01]
-        goal_time = self.takeoff_time
-        self.goto(goal_time, goal_pos)
 
     def goto(self, goal_time, goal_pos):
         msg = Trajectory()
