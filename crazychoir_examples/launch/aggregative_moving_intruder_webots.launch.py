@@ -55,7 +55,7 @@ def generate_launch_description():
     N = 3
     max_iter = 20000
 
-    # generate communication graph (this function also sets the seed)
+    # Generate communication graph
     Adj = binomial_random_graph(N, p=0.5, seed=3)
     W = metropolis_hastings(Adj)
 
@@ -92,14 +92,15 @@ def generate_launch_description():
 
     intruders_goals = {
     # id: [[t, x, y, z], ...]
-        3: [[5,-1.0, -1.0, 1.0], [20,-0.9,  0.9, 1.0], [20, 0.75,  0.75, 1.0]],
-        4: [[5,-1.0,  1.0, 1.0], [20, 0.9,  0.9, 1.0], [20, 0.75, -0.75, 1.0]],
-        5: [[5, 1.0,  1.0, 1.0], [20, 0.9, -0.9, 1.0], [20,-0.75, -0.75, 1.0]],
+        3: [[10,-1.0, -1.0, 1.0], [30,-0.9,  0.9, 1.0], [30, 0.75,  0.75, 1.0]],
+        4: [[10,-1.0,  1.0, 1.0], [30, 0.9,  0.9, 1.0], [30, 0.75, -0.75, 1.0]],
+        5: [[10, 1.0,  1.0, 1.0], [30, 0.9, -0.9, 1.0], [30,-0.75, -0.75, 1.0]],
     }
 
 
     launch_description = []
 
+    # Generate Webots World
     world_package_dir = get_package_share_directory('crazychoir_examples')
     source_filename = os.path.join(world_package_dir, 'worlds', 'empty_world.wbt')
     target_filename = os.path.join(world_package_dir, 'worlds', 'my_world.wbt')
