@@ -27,14 +27,14 @@ class AggregativeGuidanceCrazyflie(AggregativeGuidance):
         self.target = self.get_parameter_or('target').value
         if self.target is None:
             self.target = False
-            self.get_logger().warn('Target not set. Using default value False')
+            self.get_logger().warn('Static Target not set. Using default value False')
         else:
             self.target = np.array(self.target).reshape(-1,1)
         
         self.intruder = self.get_parameter_or('intruder').value
         if self.intruder is None:
             self.intruder = False
-            self.get_logger().warn('Intruder not set. Using default value False')
+            self.get_logger().warn('Static Intruder not set. Using default value False')
         else:
             self.intruder = np.array(self.intruder).reshape(-1,1)
   
@@ -98,6 +98,7 @@ class AggregativeGuidanceCrazyflieMovingIntruder(AggregativeGuidanceCrazyflie):
 
         super().__init__(optimizer, height, freq_reference, pose_handler, pose_topic, pose_callback, msg_topic, msg_type, seed)
 
+        self.get_logger().info('AggregativeGuidanceCrazyflieMovingIntruder Started!')
         self.intruder_pose = Pose(None, None,None, None)
 
 
@@ -108,6 +109,7 @@ class AggregativeGuidanceCrazyflieMovingIntruder(AggregativeGuidanceCrazyflie):
 
 
     def get_intruder(self):
+        print(self.intruder_pose.position)
         if self.intruder_pose.position is not None:
             return self.intruder_pose.position[:2].reshape(-1,1)   
         else:

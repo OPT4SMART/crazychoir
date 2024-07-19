@@ -62,12 +62,13 @@ def generate_launch_description():
     P = np.zeros((2*N, 3))
 
     # Turltebots init positions
-    P[0] = np.array([ 0.5, -0.2, 0.0])
-    P[1] = np.array([-0.3, -0.5, 0.0])
-    P[2] = np.array([-0.1,  0.5, 0.0])
-    P[3] = np.array([-1.0, -1.0, 0.0])
-    P[4] = np.array([-1.0,  1.0, 0.0])
-    P[5] = np.array([ 1.0,  1.0, 0.0])
+    P[0] = np.array([-0.3, -0.5, 0.0])
+    P[1] = np.array([ 0.2, -0.5, 0.0])
+    P[2] = np.array([ 0.7, -0.5, 0.0])
+    P[3] = np.array([-0.8,  1.0, 0.0])
+    P[4] = np.array([-0.8, -1.0, 0.0])
+    P[5] = np.array([ 1.2,  0.0, 0.0])
+
 
     robots = [{
                 'name': f'agent_{i}',
@@ -82,7 +83,7 @@ def generate_launch_description():
             } for i in range(N,2*N) ]
 
     # Target
-    target = [0.0, 0.0, 1.0]
+    target = [0.2, 0.0, 1.0]
     robots +=[{
                 'name': 'target',
                 'type': 'target', 
@@ -92,9 +93,9 @@ def generate_launch_description():
 
     intruders_goals = {
     # id: [[t, x, y, z], ...]
-        3: [[30,-0.9,  0.9, 1.0], [30, 0.75,  0.75, 1.0]],
-        4: [[30, 0.9,  0.9, 1.0], [30, 0.75, -0.75, 1.0]],
-        5: [[30, 0.9, -0.9, 1.0], [30,-0.75, -0.75, 1.0]],
+        3: [[15,-0.8, -1.0, 1.0], [15, 1.2,  0.0, 1.0]],
+        4: [[15, 1.2,  0.0, 1.0], [15,-0.8,  1.0, 1.0]],
+        5: [[15,-0.8,  1.0, 1.0], [15,-0.8, -1.0, 1.0]],
     }
 
 

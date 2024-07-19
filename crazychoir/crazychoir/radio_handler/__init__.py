@@ -3,3 +3,6 @@ from .radio_handler_fpqr import RadioHandlerFPQR
 from .radio_handler_xyz import RadioHandlerXYZ
 from .radio_handler import RadioHandler
 from .radio_handler_vel import RadioHandlerVel
+from .radio_handler_vel_lighthouse import RadioHandlerVelLightHouse
+from .radio_handler_xyz_lighthouse import RadioHandlerXYZLightHouse
+

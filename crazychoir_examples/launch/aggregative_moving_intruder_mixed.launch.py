@@ -22,7 +22,6 @@ def get_webots_driver_cf(agent_id):
         package='webots_ros2_driver',
         executable='driver',
         namespace=f'agent_{agent_id}',
-        prefix=f'xterm  -title "driver_{agent_id}" -geometry 160x7+1980 -hold -e ',# if i == 0 else None,
         output='screen',
         additional_env={
             'WEBOTS_ROBOT_NAME':f'agent_{agent_id}',
@@ -74,9 +73,9 @@ def generate_launch_description():
 
     # Set uri address for each quadrotor
     uris = [
-        'radio://0/100/2M/E7E7E7E700',
-        'radio://0/100/2M/E7E7E7E701',
-        'radio://0/100/2M/E7E7E7E702'
+        'radio://0/40/2M/E7E7E7E704',
+        'radio://0/40/2M/E7E7E7E705',
+        'radio://0/40/2M/E7E7E7E706'
     ]
 
     N = 3
@@ -88,12 +87,12 @@ def generate_launch_description():
     W = metropolis_hastings(Adj)
 
     P = np.zeros((2*N, 3))
-    P[0] = np.array([ 0.5, -0.2, 0.0])
-    P[1] = np.array([-0.3, -0.5, 0.0])
-    P[2] = np.array([-0.1,  0.5, 0.0])
-    P[3] = np.array([-1.0, -1.0, 0.0])
-    P[4] = np.array([-1.0,  1.0, 0.0])
-    P[5] = np.array([ 1.0,  1.0, 0.0])
+    P[0] = np.array([-0.3, -0.5, 0.0])
+    P[1] = np.array([ 0.2, -0.5, 0.0])
+    P[2] = np.array([ 0.7, -0.5, 0.0])
+    P[3] = np.array([-0.8,  1.0, 0.0])
+    P[4] = np.array([-0.8, -1.0, 0.0])
+    P[5] = np.array([ 1.2,  0.0, 0.0])
 
     # Project real crazyflie movements in the simulation
     robots =[{
@@ -104,7 +103,7 @@ def generate_launch_description():
 
 
     # Target
-    target = [0.0, 0.0, 1.0]
+    target = [0.2, 0.0, 1.0]
     robots +=[{
                 'name': 'target',
                 'type': 'target', 
@@ -120,9 +119,9 @@ def generate_launch_description():
     
     intruders_goals = {
     # id: [[t, x, y, z], ...]
-        3: [[30,-0.9,  0.9, 1.0], [30, 0.75,  0.75, 1.0]],
-        4: [[30, 0.9,  0.9, 1.0], [30, 0.75, -0.75, 1.0]],
-        5: [[30, 0.9, -0.9, 1.0], [30,-0.75, -0.75, 1.0]],
+        3: [[15,-0.8, -1.0, 1.0], [15, 1.2,  0.0, 1.0]],
+        4: [[15, 1.2,  0.0, 1.0], [15,-0.8,  1.0, 1.0]],
+        5: [[15,-0.8,  1.0, 1.0], [15,-0.8, -1.0, 1.0]],
     }
 
     launch_description = []
@@ -185,9 +184,9 @@ def generate_launch_description():
             weights = W[i,:].tolist()
             launch_description.append(Node(
                 package='crazychoir_examples',
-                executable='crazychoir_aggregative_webots_guidance_aggregative_moving', 
+                executable='crazychoir_aggregative_lighthouse_guidance_aggregative_moving', 
                 output='screen',
-                # prefix=f'xterm  -title "guidance_{i}" -geometry 160x7+1980+{int(135*(i))} -hold -e ',# if i == 0 else None,
+                prefix=f'xterm  -title "guidance_{i}" -geometry 160x7+1980+{int(135*(i))} -hold -e ',# if i == 0 else None,
                 namespace=f'agent_{i}',
                 parameters=[{
                     'freq': freq_guidance, 
@@ -219,7 +218,7 @@ def generate_launch_description():
                 executable='crazychoir_aggregative_lighthouse_controller', 
                 namespace=f'agent_{i}',
                 output='screen',
-                prefix=f'xterm  -title "controller_{i}" -geometry 160x4+1980+{int(95*(i+N))} -hold -e ',# if i == 0 else None,
+                # prefix=f'xterm  -title "controller_{i}" -geometry 160x4+1980+{int(95*(i+N))} -hold -e ',# if i == 0 else None,
                 parameters=[{
                     'freq': freq_controller,                       
                     'agent_id': i,

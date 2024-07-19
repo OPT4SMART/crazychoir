@@ -15,9 +15,9 @@ def generate_launch_description():
 
     # Set uri address for each quadrotor
     uris = [
-        'radio://0/100/2M/E7E7E7E700',
-        'radio://0/100/2M/E7E7E7E701',
-        'radio://0/100/2M/E7E7E7E702'
+        'radio://0/40/2M/E7E7E7E704',
+        'radio://0/40/2M/E7E7E7E705',
+        'radio://0/40/2M/E7E7E7E706'
     ]
 
     N = 3
@@ -29,18 +29,18 @@ def generate_launch_description():
     W = metropolis_hastings(Adj)
 
     P = np.zeros((N, 3))
-    P[0] = np.array([-0.5, -0.5, 0.0])
-    P[1] = np.array([ 0.0, -0.5, 0.0])
-    P[2] = np.array([ 0.5, -0.5, 0.0])
+    P[0] = np.array([-0.3, -0.5, 0.0])
+    P[1] = np.array([ 0.2, -0.5, 0.0])
+    P[2] = np.array([ 0.7, -0.5, 0.0])
 
     # Target
-    target = [0.0, 0.0, 1.0]
+    target = [0.2, 0.0, 1.0]
 
     # Intruders
     intruders = np.zeros((N, 3))
-    intruders[0] = np.array([-1.0,  1.0, 1.0])
-    intruders[1] = np.array([-1.0, -1.0, 1.0])
-    intruders[2] = np.array([ 1.0,  0.0, 1.0])
+    intruders[0] = np.array([-0.8,  1.0, 1.0])
+    intruders[1] = np.array([-0.8, -1.0, 1.0])
+    intruders[2] = np.array([ 1.2,  0.0, 1.0])
 
 
     launch_description = []

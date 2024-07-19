@@ -1,5 +1,7 @@
 from typing import Callable
 import numpy as np
+from rclpy.parameter import Parameter
+
 from rclpy.node import Node
 from std_msgs.msg import Empty
 from geometry_msgs.msg import Twist 
@@ -7,7 +9,7 @@ from trajectory_msgs.msg import JointTrajectory as Trajectory, JointTrajectoryPo
 
 from choirbot import Pose
 from choirbot.utils.position_getter import pose_subscribe
-
+from nav_msgs.msg import Odometry
 
 import cflib.crtp
 from cflib.crazyflie.swarm import CachedCfFactory
@@ -32,6 +34,14 @@ class RadioHandler(Node):
         self.logger = self.get_parameter_or('logger').value
         self.log_period = 200 # [ms]
 
+        self.send_groundtruth = self.get_parameter_or('send_groundtruth', Parameter('def_gt', Parameter.Type.BOOL, True)).value
+        
+        self.pub_odom = {}
+        for i in self.agent_ids:
+            topic_name = f'/agent_{i}/cf_odom'
+            self.pub_odom[i] = self.create_publisher(Odometry, topic_name, 10)
+            print(f'Creating Odom publisher for {i}')
+
         print("Uris associated to this radio   :\t{}".format(self.uris))
         print("Agents associated to this radio :\t{}\n".format(self.agent_ids))
 
@@ -55,17 +65,19 @@ class RadioHandler(Node):
         # Open communication links      
         self.swarm.open_links()
 
+        i = 0
         for uri, scf in self.swarm._cfs.items():
             cf = scf.cf
             self.set_values(uri, cf)
-            # self.read_values(uri, cf)
+            agent_id = self.agent_ids[i]
             if self.logger is not None:
-                self.set_log(uri,cf, self.log_period)
+                self.set_log(uri,cf, self.log_period, agent_id)
+            i += 1
             
         # Unlock startup thrust protection
         for uri, scf in self.swarm._cfs.items():
             cf = scf.cf
-            cf.commander.send_setpoint(0,0,0,0)
+            # cf.commander.send_setpoint(0,0,0,0) # this breaks the xyz radio
             # print("[{}] \t  cf{} state = {}".format(time.time(), int(uri[-1]), scf.cf.state))
             self.get_logger().info('cf{} ready!'.format(int(uri[-1])))        
         
@@ -87,14 +99,11 @@ class RadioHandler(Node):
             pose_topic = '/vicon/cf{}/cf{}'.format(vicon_id,vicon_id)
             pose_callback = None
 
-            # TODO: Verify that Kalman Filter works also with fpqr commands
-            if self.cmd_topic == 'traj_params': 
-                # This is the case in which we send position goals to cf, hence, we need to send vicon pose to them
+            if self.send_groundtruth:
                 pose_callback = SendViconPose()
                 pose_callback.set_callback(self.current_poses[uri[-1]],cf)
+                self.subscriptions_pose_list[uri[-1]] = pose_subscribe(pose_handler, pose_topic, self, self.current_poses[uri[-1]], pose_callback)
 
-            self.subscriptions_pose_list[uri[-1]] = pose_subscribe(pose_handler, pose_topic, self, self.current_poses[uri[-1]], pose_callback)
-            
             # Commands Subscription
             agent_id = self.agent_ids[i]
             if self.cmd_topic == 'traj_params':
@@ -119,17 +128,21 @@ class RadioHandler(Node):
         raise NotImplementedError
 
     def check_safety_area(self):
-        for uri, scf in self.swarm._cfs.items():
-            safezone_ck = [np.abs(self.current_poses[uri[-1]].position.item(i)) > self.safezone_limits[i] for i in range(3)]
-            if any(safezone_ck):
-                self.emergency_stop = True
-                self.get_logger().warn('CF{} KILLED: OUT OF SAFE ZONE'.format(int(uri[-1])))        
-        
+        pass
+        # for uri, scf in self.swarm._cfs.items():
+        #     if self.current_poses[uri[-1]].position is None:
+        #         self.get_logger().warn('CF{}: Position not available. Cannot be checked'.format(int(uri[-1])))
+        #         break
+        #     safezone_ck = [np.abs(self.current_poses[uri[-1]].position.item(i)) > self.safezone_limits[i] for i in range(3)]
+        #     if any(safezone_ck):
+        #         self.emergency_stop = True
+        #         self.get_logger().warn('CF{} KILLED: OUT OF SAFE ZONE'.format(int(uri[-1])))    
+
     ################################
     # Logging methods
     ################################
 
-    def set_log(self, uri, cf, log_period_in_ms):
+    def set_log(self, uri, cf, log_period_in_ms, agent_id):
         """
         Logging groups and variables retrived from 
             https://www.bitcraze.io/documentation/repository/crazyflie-firmware/master/api/logs/

@@ -75,7 +75,7 @@ class VelocityController(CrazyflieController):
             self.send_input(crazyflie_input)
 
         else:
-            self.get_logger().warn('Pose not available - stopping the drone')
+            # self.get_logger().warn('Pose not available - stopping the drone')
             crazyflie_input = self.command_sender.command_sender(np.zeros(3))
             self.send_input(crazyflie_input)
 
