@@ -159,7 +159,7 @@ Once you have opened a shell in the container, you can run the CrazyChoir exampl
 ```bash
 colcon build --symlink-install
 source install/setup.bash
-ros2 launch crazychoir_examples task_assignment_webots.launch.py
+ros2 launch crazychoir_examples aggregative_moving_intruders_webots.launch.py
 ```
 Your monitor should display something like that
 
