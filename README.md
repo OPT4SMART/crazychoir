@@ -6,6 +6,7 @@
 | :warning: Information for end users |
 |:------------------------------------|
 | Documentation pages are currently being uploaded. The latest version will be available soon. |
+| If you need urgent support, please contact [Lorenzo](https://github.com/lorenzopichierri)!   |
 
 |🚨 **NEWS** 🚨|
 |:-------------|
