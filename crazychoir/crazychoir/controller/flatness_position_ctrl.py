@@ -41,7 +41,7 @@ class FlatnessPositionCtrl(PositionCtrlStrategy):
         # compute thrust
         RR = R.from_quat(current_pose.orientation).as_matrix()
         e_3 = np.array([0,0,1])
-        thrust = np.dot(np.dot(RR,F_des),e_3)
+        thrust = np.dot(F_des,np.dot(RR,e_3))
 
         # compute desired attitude
         if not "yaw" in desired_reference:
