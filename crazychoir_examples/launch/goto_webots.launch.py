@@ -51,7 +51,7 @@ def generate_launch_description():
 
     P = np.zeros((N, 3))
 
-    # Turltebots init positions
+    # Crazyflie init positions
     P[0] = np.array([ 0.5, -0.5, 0.0])
     P[1] = np.array([ 0.5,  0.5, 0.0])
     P[2] = np.array([-0.5,  0.5, 0.0])
