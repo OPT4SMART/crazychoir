@@ -105,7 +105,7 @@ def generate_launch_description():
     # Launch control Panel
     launch_description.append(Node(
                 package='crazychoir_examples', 
-                executable='crazychoir_aggregative_lighthouse_gui',
+                executable='crazychoir_aggregative_webots_gui',
                 output='screen',
                 parameters=[{
                     'n_agents': N,
