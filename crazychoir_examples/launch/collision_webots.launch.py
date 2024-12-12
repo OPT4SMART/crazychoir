@@ -150,7 +150,7 @@ def generate_launch_description():
         # reference
         launch_description.append(Node(
             package='crazychoir_examples',
-            executable='crazychoir_collision_webots_trajectory_vel', 
+            executable='crazychoir_collision_webots_trajectory', 
             namespace=f'agent_{i}',
             output='screen',
             parameters=[{     
