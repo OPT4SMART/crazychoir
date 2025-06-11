@@ -29,7 +29,7 @@ Floor {
     }
     texture ImageTexture {
       url [
-        "../../../../../src/crazychoir/crazychoir/utils/images/casy_logo.png"
+        "/home/opt4smart/crazychoir_ws/src/crazychoir/crazychoir/crazychoir/utils/images/casy_logo.png"
       ]
       repeatS FALSE
       repeatT FALSE
